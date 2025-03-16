@@ -1,0 +1,36 @@
+{
+    "name": "roo_quantity",
+    "description": "Type-safe and unit-independent representation of physical quantities. Helps you avoid bugs related to confusing the units or the order of numerical parameters.",
+    "keywords": [
+        "temperature",
+        "pressure"
+    ],
+    "authors": [
+        {
+            "name": "Dejwk",
+            "email": "dejwk.oss@gmail.com",
+            "maintainer": true
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dejwk/roo_quantity"
+    },
+    "version": "1.0.0",
+    "homepage": "https://github.com/dejwk/roo_quantity",
+    "frameworks": [
+        "Arduino"
+    ],
+    "build": {
+        "srcDir": "src",
+        "srcFilter": "+<*> -<examples> -<benchmarks> -<doc> -<test>"
+    },
+    "examples": [
+        "examples/**/*.ino"
+    ],
+    "dependencies": {
+        "dejwk/roo_flags": ">0",
+        "dejwk/roo_logging": ">=1.0.5",
+        "dejwk/roo_time": ">=1.0.7"
+    }
+}
