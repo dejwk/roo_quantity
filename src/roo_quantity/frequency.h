@@ -146,6 +146,14 @@ inline Frequency operator*(float a, Frequency b) {
   return FrequencyInHertz(a * b.inHertz());
 }
 
+inline float operator*(Time a, Frequency b) {
+  return a.inSeconds() * b.inHertz();
+}
+
+inline float operator*(Frequency a, Time b) {
+  return a.inHertz() * b.inSeconds();
+}
+
 inline Frequency operator/(Frequency a, float b) {
   return FrequencyInHertz(a.inHertz() / b);
 }
