@@ -182,4 +182,6 @@ inline Time operator/(Charge a, Current b) {
   return TimeInSeconds(a.inCoulombs() / b.inAmperes());
 }
 
+roo_logging::Stream& operator<<(roo_logging::Stream& os, const Current& val);
+
 }  // namespace roo_quantity

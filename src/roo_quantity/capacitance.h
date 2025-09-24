@@ -196,4 +196,7 @@ inline Voltage operator/(Charge a, Capacitance b) {
   return VoltageInVolts(a.inCoulombs() / b.inFarads());
 }
 
+roo_logging::Stream& operator<<(roo_logging::Stream& os,
+                                const Capacitance& val);
+
 }  // namespace roo_quantity

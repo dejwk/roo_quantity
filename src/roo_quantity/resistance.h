@@ -204,4 +204,6 @@ inline Current operator/(Voltage a, Resistance b) {
   return CurrentInAmperes(a.inVolts() / b.inOhms());
 }
 
+roo_logging::Stream& operator<<(roo_logging::Stream& os, const Resistance& val);
+
 }  // namespace roo_quantity

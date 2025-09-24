@@ -149,4 +149,6 @@ inline float operator/(Charge a, Charge b) {
   return a.inCoulombs() / b.inCoulombs();
 }
 
+roo_logging::Stream& operator<<(roo_logging::Stream& os, const Charge& val);
+
 }  // namespace roo_quantity

@@ -178,4 +178,6 @@ inline float operator/(Force a, Force b) {
   return a.inNewtons() / b.inNewtons();
 }
 
+roo_logging::Stream& operator<<(roo_logging::Stream& os, const Force& val);
+
 }  // namespace roo_quantity

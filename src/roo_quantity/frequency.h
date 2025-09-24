@@ -170,4 +170,6 @@ inline Frequency operator/(float a, Time b) {
   return FrequencyInHertz(a / b.inSeconds());
 }
 
+roo_logging::Stream &operator<<(roo_logging::Stream &os, const Frequency &val);
+
 }  // namespace roo_quantity

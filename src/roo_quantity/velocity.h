@@ -214,4 +214,6 @@ inline Time operator/(Length a, Velocity b) {
   return TimeInSeconds(a.inMeters() / b.inMetersPerSecond());
 }
 
+roo_logging::Stream& operator<<(roo_logging::Stream& os, const Velocity& val);
+
 }  // namespace roo_quantity

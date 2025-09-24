@@ -179,4 +179,6 @@ inline Time operator/(Work w, Power b) {
   return TimeInSeconds(w.inJoules() / b.inWatts());
 }
 
+roo_logging::Stream& operator<<(roo_logging::Stream& os, const Power& val);
+
 }  // namespace roo_quantity

@@ -173,4 +173,6 @@ inline VolumeFlowRate operator/(Volume a, Time b) {
                                               b.inSeconds());
 }
 
+roo_logging::Stream& operator<<(roo_logging::Stream& os, const VolumeFlowRate& val);
+
 }  // namespace roo_quantity

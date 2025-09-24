@@ -151,4 +151,6 @@ inline Work operator/(Work a, float b) {
 
 inline float operator/(Work a, Work b) { return a.inJoules() / b.inJoules(); }
 
+roo_logging::Stream& operator<<(roo_logging::Stream& os, const Work& val);
+
 }  // namespace roo_quantity

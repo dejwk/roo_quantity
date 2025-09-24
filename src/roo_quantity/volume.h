@@ -217,4 +217,6 @@ inline Length operator/(Volume a, Area b) {
   return LengthInMeters(a.inCubicMeters() / b.inSquareMeters());
 }
 
+roo_logging::Stream &operator<<(roo_logging::Stream &os, const Volume &val);
+
 }  // namespace roo_quantity

@@ -211,4 +211,6 @@ inline Pressure operator*(Force a, AreicNumber b) {
   return PressureInPascals(a.inNewtons() * b.inUnitsPerSquareMeter());
 }
 
+roo_logging::Stream& operator<<(roo_logging::Stream& os, const Pressure& val);
+
 }  // namespace roo_quantity

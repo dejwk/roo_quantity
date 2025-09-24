@@ -191,4 +191,6 @@ inline Charge operator/(Work a, Voltage b) {
   return ChargeInCoulombs(a.inJoules() / b.inVolts());
 }
 
+roo_logging::Stream& operator<<(roo_logging::Stream& os, const Voltage& val);
+
 }  // namespace roo_quantity

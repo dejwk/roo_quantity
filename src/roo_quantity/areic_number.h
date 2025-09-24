@@ -240,4 +240,7 @@ inline AreicNumber operator/(float a, Area b) {
   return AreicNumberInUnitsPerSquareMeter(a / b.inSquareMeters());
 }
 
+roo_logging::Stream& operator<<(roo_logging::Stream& os,
+                                const AreicNumber& val);
+
 }  // namespace roo_quantity

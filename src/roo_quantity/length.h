@@ -212,4 +212,6 @@ inline float operator/(Length a, Length b) {
   return a.inMeters() / b.inMeters();
 }
 
+roo_logging::Stream& operator<<(roo_logging::Stream& os, const Length& val);
+
 }  // namespace roo_quantity

@@ -274,4 +274,7 @@ inline VolumicNumber operator/(float a, Volume b) {
   return VolumicNumberInUnitsPerCubicMeter(a / b.inCubicMeters());
 }
 
+roo_logging::Stream& operator<<(roo_logging::Stream& os,
+                                const VolumicNumber& val);
+
 }  // namespace roo_quantity

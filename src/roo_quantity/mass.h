@@ -152,4 +152,6 @@ inline Mass operator/(Mass a, float b) { return MassInKg(a.inKg() / b); }
 
 inline float operator/(Mass a, Mass b) { return a.inKg() / b.inKg(); }
 
+roo_logging::Stream& operator<<(roo_logging::Stream& os, const Mass& val);
+
 }  // namespace roo_quantity

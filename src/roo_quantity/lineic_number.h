@@ -230,4 +230,7 @@ inline LineicNumber operator/(float a, Length b) {
   return LineicNumberInUnitsPerMeter(a / b.inMeters());
 }
 
+roo_logging::Stream& operator<<(roo_logging::Stream& os,
+                                const LineicNumber& val);
+
 }  // namespace roo_quantity
