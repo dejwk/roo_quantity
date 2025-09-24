@@ -109,6 +109,17 @@ cc_test(
 )
 
 cc_test(
+    name = "si_test",
+    srcs = glob(["test/si_test.cpp"]),
+    linkstatic = 1,
+    size = "small",
+    deps = [
+        ":roo_quantity",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
     name = "temperature_test",
     srcs = glob(["test/temperature_test.cpp"]),
     linkstatic = 1,
@@ -122,17 +133,6 @@ cc_test(
 cc_test(
     name = "time_test",
     srcs = glob(["test/time_test.cpp"]),
-    linkstatic = 1,
-    size = "small",
-    deps = [
-        ":roo_quantity",
-        "@googletest//:gtest_main",
-    ],
-)
-
-cc_test(
-    name = "si_test",
-    srcs = glob(["test/si_test.cpp"]),
     linkstatic = 1,
     size = "small",
     deps = [
@@ -166,6 +166,17 @@ cc_test(
 cc_test(
     name = "volumic_number_test",
     srcs = glob(["test/volumic_number_test.cpp"]),
+    linkstatic = 1,
+    size = "small",
+    deps = [
+        ":roo_quantity",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
+    name = "work_test",
+    srcs = glob(["test/work_test.cpp"]),
     linkstatic = 1,
     size = "small",
     deps = [
