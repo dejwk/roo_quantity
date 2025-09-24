@@ -37,6 +37,9 @@ TEST(Length, ConversionNonSi) {
   t = LengthInFeet(3.280839895f);
   EXPECT_FLOAT_EQ(1.0f, t.inMeters());
 
+  t = LengthInYards(1.0936132983f);
+  EXPECT_FLOAT_EQ(1.0f, t.inMeters());
+
   t = LengthInLightYears(1.057000834E-16f);
   EXPECT_FLOAT_EQ(1.0f, t.inMeters());
 }

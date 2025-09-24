@@ -48,6 +48,9 @@ class Length {
   // Returns the length in feet.
   float inFeet() const { return length_ * 3.280839895f; }
 
+  // Returns the length in yards.
+  float inYards() const { return length_ * 1.0936132983f; }
+
   // Returns the length in light years.
   float inLightYears() const { return length_ * 1.057000834E-16f; }
 
@@ -169,6 +172,12 @@ inline Length LengthInInches(float length) {
 // expressed in feet.
 inline Length LengthInFeet(float length) {
   return LengthInMeters(length * 0.3048f);
+}
+
+// Returns a length object equivalent to the specified length
+// expressed in yards.
+inline Length LengthInYards(float length) {
+  return LengthInMeters(length * 0.9144f);
 }
 
 // Returns a length object equivalent to the specified length
