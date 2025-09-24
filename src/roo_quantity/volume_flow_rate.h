@@ -44,28 +44,48 @@ class VolumeFlowRate {
   // Returns whether the object represents an unknown volume flow rate.
   bool isUnknown() const { return std::isnan(volume_flow_rate_); }
 
-  bool operator<(const VolumeFlowRate &other) const {
+  bool operator<(const VolumeFlowRate& other) const {
     return volume_flow_rate_ < other.volume_flow_rate_;
   }
 
-  bool operator==(const VolumeFlowRate &other) const {
+  bool operator==(const VolumeFlowRate& other) const {
     return volume_flow_rate_ == other.volume_flow_rate_;
   }
 
-  bool operator>(const VolumeFlowRate &other) const {
+  bool operator>(const VolumeFlowRate& other) const {
     return other.volume_flow_rate_ < volume_flow_rate_;
   }
 
-  bool operator<=(const VolumeFlowRate &other) const {
+  bool operator<=(const VolumeFlowRate& other) const {
     return !(other.volume_flow_rate_ < volume_flow_rate_);
   }
 
-  bool operator>=(const VolumeFlowRate &other) const {
+  bool operator>=(const VolumeFlowRate& other) const {
     return !(volume_flow_rate_ < other.volume_flow_rate_);
   }
 
-  bool operator!=(const VolumeFlowRate &other) const {
+  bool operator!=(const VolumeFlowRate& other) const {
     return !(volume_flow_rate_ == other.volume_flow_rate_);
+  }
+
+  inline VolumeFlowRate& operator+=(const VolumeFlowRate& other) {
+    volume_flow_rate_ += other.inCubicMetersPerSecond();
+    return *this;
+  }
+
+  inline VolumeFlowRate& operator-=(const VolumeFlowRate& other) {
+    volume_flow_rate_ -= other.inCubicMetersPerSecond();
+    return *this;
+  }
+
+  inline VolumeFlowRate& operator*=(float multi) {
+    volume_flow_rate_ *= multi;
+    return *this;
+  }
+
+  inline VolumeFlowRate& operator/=(float div) {
+    volume_flow_rate_ /= div;
+    return *this;
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
@@ -85,7 +105,7 @@ class VolumeFlowRate {
   explicit VolumeFlowRate(float volume_flow_rate)
       : volume_flow_rate_(volume_flow_rate) {}
 
-  // Stored in meters.
+  // Stored in cubic meters per second.
   float volume_flow_rate_;
 };
 
@@ -120,12 +140,29 @@ inline VolumeFlowRate operator+(VolumeFlowRate a, VolumeFlowRate b) {
                                               b.inCubicMetersPerSecond());
 }
 
+inline VolumeFlowRate operator-(VolumeFlowRate a, VolumeFlowRate b) {
+  return VolumeFlowRateInCubicMetersPerSecond(a.inCubicMetersPerSecond() -
+                                              b.inCubicMetersPerSecond());
+}
+
+inline VolumeFlowRate operator-(VolumeFlowRate a) {
+  return VolumeFlowRateInCubicMetersPerSecond(-a.inCubicMetersPerSecond());
+}
+
 inline VolumeFlowRate operator*(VolumeFlowRate a, float b) {
   return VolumeFlowRateInCubicMetersPerSecond(a.inCubicMetersPerSecond() * b);
 }
 
 inline VolumeFlowRate operator*(float a, VolumeFlowRate b) {
   return VolumeFlowRateInCubicMetersPerSecond(a * b.inCubicMetersPerSecond());
+}
+
+inline Volume operator*(VolumeFlowRate a, Time b) {
+  return VolumeInCubicMeters(a.inCubicMetersPerSecond() * b.inSeconds());
+}
+
+inline Volume operator*(Time a, VolumeFlowRate b) {
+  return VolumeInCubicMeters(a.inSeconds() * b.inCubicMetersPerSecond());
 }
 
 inline VolumeFlowRate operator/(VolumeFlowRate a, float b) {
