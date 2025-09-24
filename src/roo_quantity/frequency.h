@@ -67,6 +67,16 @@ class Frequency {
     return !(frequency_ == other.frequency_);
   }
 
+  Frequency &operator*=(float multi) {
+    frequency_ *= multi;
+    return *this;
+  }
+
+  Frequency &operator/=(float div) {
+    frequency_ /= div;
+    return *this;
+  }
+
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
   // Returns the string representation of the frequency.
   std::string asString() const;
@@ -128,10 +138,6 @@ inline Frequency FrequencyInMicroHertz(float frequency) {
   return FrequencyInHertz(frequency * 0.000001f);
 }
 
-inline Frequency operator+(Frequency a, Frequency b) {
-  return FrequencyInHertz(a.inHertz() + b.inHertz());
-}
-
 inline Frequency operator*(Frequency a, float b) {
   return FrequencyInHertz(a.inHertz() * b);
 }
@@ -148,12 +154,12 @@ inline float operator/(Frequency a, Frequency b) {
   return a.inHertz() / b.inHertz();
 }
 
-inline Time Invert(Frequency val) {
-  return TimeInSeconds(1.0f / val.inHertz());
+inline Time operator/(float a, Frequency b) {
+  return TimeInSeconds(a / b.inHertz());
 }
 
-inline Frequency Invert(Time val) {
-  return FrequencyInHertz(1.0f / val.inSeconds());
+inline Frequency operator/(float a, Time b) {
+  return FrequencyInHertz(a / b.inSeconds());
 }
 
 }  // namespace roo_quantity

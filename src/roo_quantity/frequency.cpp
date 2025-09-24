@@ -6,7 +6,7 @@ namespace roo_quantity {
 namespace {
 
 void FrequencyToString(const Frequency& val, char* out, int maxlen) {
-  FormatSimpleSiValue(val.inHertz(), "Ω", out, maxlen);
+  FormatSimpleSiValue(val.inHertz(), "Hz", out, maxlen);
 }
 
 }  // namespace
