@@ -1,5 +1,6 @@
-#include "gtest/gtest.h"
 #include "roo_quantity/linear_number_density.h"
+
+#include "gtest/gtest.h"
 
 namespace roo_quantity {
 
@@ -100,6 +101,19 @@ TEST(LinearNumberDensity, Operators) {
   ld2 /= 2.0f;
   EXPECT_FLOAT_EQ(2.5f, ld2.inUnitsPerMeter());
   EXPECT_EQ(3.0f, LengthInMeters(6) * LinearNumberDensityInUnitsPerMeter(0.5f));
+}
+
+TEST(LinearNumberDensity, Reciprocal) {
+  Length len = LengthInMeters(2.0f);
+  LinearNumberDensity ld = LinearNumberDensityInUnitsPerMeter(0.5f);
+  EXPECT_FLOAT_EQ(1.0f, (len * ld));
+  EXPECT_FLOAT_EQ(1.0f, (ld * len));
+
+  len = 4.0f / ld;
+  EXPECT_FLOAT_EQ(8.0f, len.inMeters());
+
+  ld = 8.0f / len;
+  EXPECT_FLOAT_EQ(1.0f, ld.inUnitsPerMeter());
 }
 
 TEST(LinearNumberDensity, AsString) {
