@@ -87,6 +87,17 @@ cc_test(
 )
 
 cc_test(
+    name = "pressure_test",
+    srcs = glob(["test/pressure_test.cpp"]),
+    linkstatic = 1,
+    size = "small",
+    deps = [
+        ":roo_quantity",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
     name = "temperature_test",
     srcs = glob(["test/temperature_test.cpp"]),
     linkstatic = 1,
