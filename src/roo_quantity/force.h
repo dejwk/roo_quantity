@@ -4,6 +4,9 @@
 
 #include "roo_flags.h"
 #include "roo_logging.h"
+#include "roo_quantity/length.h"
+#include "roo_quantity/lineic_number.h"
+#include "roo_quantity/work.h"
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
 #include <string>
@@ -133,6 +136,12 @@ inline Force operator+(Force a, Force b) {
   return ForceInNewtons(a.inNewtons() + b.inNewtons());
 }
 
+inline Force operator-(Force a, Force b) {
+  return ForceInNewtons(a.inNewtons() - b.inNewtons());
+}
+
+inline Force operator-(Force a) { return ForceInNewtons(-a.inNewtons()); }
+
 inline Force operator*(Force a, float b) {
   return ForceInNewtons(a.inNewtons() * b);
 }
@@ -141,8 +150,28 @@ inline Force operator*(float a, Force b) {
   return ForceInNewtons(a * b.inNewtons());
 }
 
+inline Work operator*(Force a, Length b) {
+  return WorkInJoules(a.inNewtons() * b.inMeters());
+}
+
+inline Work operator*(Length a, Force b) {
+  return WorkInJoules(a.inMeters() * b.inNewtons());
+}
+
 inline Force operator/(Force a, float b) {
   return ForceInNewtons(a.inNewtons() / b);
+}
+
+inline Force operator/(Work a, Length b) {
+  return ForceInNewtons(a.inJoules() / b.inMeters());
+}
+
+inline Length operator/(Work a, Force b) {
+  return LengthInMeters(a.inJoules() / b.inNewtons());
+}
+
+inline Force operator*(Work a, LineicNumber b) {
+  return ForceInNewtons(a.inJoules() * b.inUnitsPerMeter());
 }
 
 inline float operator/(Force a, Force b) {

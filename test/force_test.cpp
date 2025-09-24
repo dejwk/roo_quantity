@@ -64,6 +64,19 @@ TEST(Force, Operators) {
   EXPECT_FLOAT_EQ(1.5f, f1.inNewtons());
 }
 
+TEST(Force, Reciprocal) {
+  Force f = ForceInNewtons(1.5f);
+  Length l = LengthInMeters(2.0f);
+  Work w = f * l;
+  EXPECT_FLOAT_EQ(3.0f, w.inJoules());
+  w = l * f;
+  EXPECT_FLOAT_EQ(3.0f, w.inJoules());
+  f = w / l;
+  EXPECT_FLOAT_EQ(1.5f, f.inNewtons());
+  l = w / f;
+  EXPECT_FLOAT_EQ(2.0f, l.inMeters());
+}
+
 TEST(Force, AsString) {
   EXPECT_EQ("1.5 N", ForceInNewtons(1.5f).asString());
   EXPECT_EQ("1.5 kN", ForceInKiloNewtons(1.5f).asString());
