@@ -38,23 +38,15 @@ class Time {
 
   bool operator<(const Time &other) const { return time_ < other.time_; }
 
-  bool operator==(const Time &other) const {
-    return time_ == other.time_;
-  }
+  bool operator==(const Time &other) const { return time_ == other.time_; }
 
   bool operator>(const Time &other) const { return other.time_ < time_; }
 
-  bool operator<=(const Time &other) const {
-    return !(other.time_ < time_);
-  }
+  bool operator<=(const Time &other) const { return !(other.time_ < time_); }
 
-  bool operator>=(const Time &other) const {
-    return !(time_ < other.time_);
-  }
+  bool operator>=(const Time &other) const { return !(time_ < other.time_); }
 
-  bool operator!=(const Time &other) const {
-    return !(time_ == other.time_);
-  }
+  bool operator!=(const Time &other) const { return !(time_ == other.time_); }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
   // Returns the string representation of the time.
@@ -82,6 +74,14 @@ inline Time TimeInSeconds(float time);
 inline Time UnknownTime() { return Time(); }
 
 // Returns a time object equivalent to the specified time
+// expressed in minutes (60 seconds).
+inline Time TimeInMinutes(float time) { return TimeInSeconds(time * 60.0f); }
+
+// Returns a time object equivalent to the specified time
+// expressed in hours (3600 seconds).
+inline Time TimeInHours(float time) { return TimeInSeconds(time * 3600.0f); }
+
+// Returns a time object equivalent to the specified time
 // expressed in seconds.
 inline Time TimeInSeconds(float time) { return Time(time); }
 
@@ -107,6 +107,10 @@ inline Time operator+(Time a, Time b) {
   return TimeInSeconds(a.inSeconds() + b.inSeconds());
 }
 
+inline Time operator-(Time a, Time b) {
+  return TimeInSeconds(a.inSeconds() - b.inSeconds());
+}
+
 inline Time operator*(Time a, float b) {
   return TimeInSeconds(a.inSeconds() * b);
 }
@@ -119,8 +123,6 @@ inline Time operator/(Time a, float b) {
   return TimeInSeconds(a.inSeconds() / b);
 }
 
-inline float operator/(Time a, Time b) {
-  return a.inSeconds() / b.inSeconds();
-}
+inline float operator/(Time a, Time b) { return a.inSeconds() / b.inSeconds(); }
 
 }  // namespace roo_quantity

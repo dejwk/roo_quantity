@@ -21,6 +21,17 @@ cc_library(
 )
 
 cc_test(
+    name = "time_test",
+    srcs = glob(["test/time_test.cpp"]),
+    linkstatic = 1,
+    size = "small",
+    deps = [
+        ":roo_quantity",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
     name = "si_test",
     srcs = glob(["test/si_test.cpp"]),
     linkstatic = 1,
