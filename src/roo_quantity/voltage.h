@@ -4,6 +4,8 @@
 
 #include "roo_flags.h"
 #include "roo_logging.h"
+#include "roo_quantity/current.h"
+#include "roo_quantity/power.h"
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
 #include <string>
@@ -36,24 +38,48 @@ class Voltage {
   // Returns whether the object represents an unknown voltage.
   bool isUnknown() const { return std::isnan(voltage_); }
 
-  bool operator<(const Voltage &other) const { return voltage_ < other.voltage_; }
+  bool operator<(const Voltage& other) const {
+    return voltage_ < other.voltage_;
+  }
 
-  bool operator==(const Voltage &other) const {
+  bool operator==(const Voltage& other) const {
     return voltage_ == other.voltage_;
   }
 
-  bool operator>(const Voltage &other) const { return other.voltage_ < voltage_; }
+  bool operator>(const Voltage& other) const {
+    return other.voltage_ < voltage_;
+  }
 
-  bool operator<=(const Voltage &other) const {
+  bool operator<=(const Voltage& other) const {
     return !(other.voltage_ < voltage_);
   }
 
-  bool operator>=(const Voltage &other) const {
+  bool operator>=(const Voltage& other) const {
     return !(voltage_ < other.voltage_);
   }
 
-  bool operator!=(const Voltage &other) const {
+  bool operator!=(const Voltage& other) const {
     return !(voltage_ == other.voltage_);
+  }
+
+  inline Voltage& operator+=(const Voltage& other) {
+    voltage_ += other.inVolts();
+    return *this;
+  }
+
+  inline Voltage& operator-=(const Voltage& other) {
+    voltage_ -= other.inVolts();
+    return *this;
+  }
+
+  inline Voltage& operator*=(float multi) {
+    voltage_ *= multi;
+    return *this;
+  }
+
+  inline Voltage& operator/=(float div) {
+    voltage_ /= div;
+    return *this;
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
@@ -107,6 +133,12 @@ inline Voltage operator+(Voltage a, Voltage b) {
   return VoltageInVolts(a.inVolts() + b.inVolts());
 }
 
+inline Voltage operator-(Voltage a, Voltage b) {
+  return VoltageInVolts(a.inVolts() - b.inVolts());
+}
+
+inline Voltage operator-(Voltage a) { return VoltageInVolts(-a.inVolts()); }
+
 inline Voltage operator*(Voltage a, float b) {
   return VoltageInVolts(a.inVolts() * b);
 }
@@ -121,6 +153,42 @@ inline Voltage operator/(Voltage a, float b) {
 
 inline float operator/(Voltage a, Voltage b) {
   return a.inVolts() / b.inVolts();
+}
+
+// Vs power.
+
+inline Power operator*(Voltage a, Current b) {
+  return PowerInWatts(a.inVolts() * b.inAmperes());
+}
+
+inline Power operator*(Current a, Voltage b) {
+  return PowerInWatts(a.inAmperes() * b.inVolts());
+}
+
+inline Voltage operator/(Power a, Current b) {
+  return VoltageInVolts(a.inWatts() / b.inAmperes());
+}
+
+inline Current operator/(Power a, Voltage b) {
+  return CurrentInAmperes(a.inWatts() / b.inVolts());
+}
+
+// Vs work.
+
+inline Work operator*(Voltage a, Charge b) {
+  return WorkInJoules(a.inVolts() * b.inCoulombs());
+}
+
+inline Work operator*(Charge a, Voltage b) {
+  return WorkInJoules(a.inCoulombs() * b.inVolts());
+}
+
+inline Voltage operator/(Work a, Charge b) {
+  return VoltageInVolts(a.inJoules() / b.inCoulombs());
+}
+
+inline Charge operator/(Work a, Voltage b) {
+  return ChargeInCoulombs(a.inJoules() / b.inVolts());
 }
 
 }  // namespace roo_quantity
