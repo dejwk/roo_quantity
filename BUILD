@@ -21,6 +21,17 @@ cc_library(
 )
 
 cc_test(
+    name = "area_test",
+    srcs = glob(["test/area_test.cpp"]),
+    linkstatic = 1,
+    size = "small",
+    deps = [
+        ":roo_quantity",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
     name = "frequency_test",
     srcs = glob(["test/frequency_test.cpp"]),
     linkstatic = 1,

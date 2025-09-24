@@ -67,6 +67,26 @@ class Area {
 
   bool operator!=(const Area &other) const { return !(area_ == other.area_); }
 
+  inline Area &operator+=(const Area &other) {
+    area_ += other.inSquareMeters();
+    return *this;
+  }
+
+  inline Area &operator-=(const Area &other) {
+    area_ -= other.inSquareMeters();
+    return *this;
+  }
+
+  inline Area &operator*=(float multi) {
+    area_ *= multi;
+    return *this;
+  }
+
+  inline Area &operator/=(float div) {
+    area_ /= div;
+    return *this;
+  }
+
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
   // Returns the string representation of the area.
   std::string asString() const;
@@ -150,6 +170,14 @@ inline Area AreaInSquareInches(float area) {
 
 inline Area operator+(Area a, Area b) {
   return AreaInSquareMeters(a.inSquareMeters() + b.inSquareMeters());
+}
+
+inline Area operator-(Area a, Area b) {
+  return AreaInSquareMeters(a.inSquareMeters() - b.inSquareMeters());
+}
+
+inline Area operator-(Area a) {
+  return AreaInSquareMeters(-a.inSquareMeters());
 }
 
 inline Area operator*(Area a, float b) {
