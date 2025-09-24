@@ -36,11 +36,6 @@ class VolumeFlowRate {
     return volume_flow_rate_ * 1000000.0f;
   }
 
-  // Returns the volume flow rate in milliliters per second.
-  float inMilliLitersPerSecond() const {
-    return volume_flow_rate_ * 1000000.0f;
-  }
-
   // Returns whether the object represents an unknown volume flow rate.
   bool isUnknown() const { return std::isnan(volume_flow_rate_); }
 

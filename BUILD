@@ -142,6 +142,17 @@ cc_test(
 )
 
 cc_test(
+    name = "volume_flow_rate_test",
+    srcs = glob(["test/volume_flow_rate_test.cpp"]),
+    linkstatic = 1,
+    size = "small",
+    deps = [
+        ":roo_quantity",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
     name = "volumic_number_test",
     srcs = glob(["test/volumic_number_test.cpp"]),
     linkstatic = 1,

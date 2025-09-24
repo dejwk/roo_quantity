@@ -5,7 +5,7 @@ namespace {
 
 void VolumeFlowRateToString(const VolumeFlowRate& val, char* out, int maxlen) {
   if (val.isUnknown()) {
-    strncpy(out, "? m", maxlen);
+    strncpy(out, "? m³/s", maxlen);
   } else {
     const char* format;
     float num;
@@ -17,7 +17,7 @@ void VolumeFlowRateToString(const VolumeFlowRate& val, char* out, int maxlen) {
       num = val.inLitersPerSecond();
     } else {
       format = "%g mL/s";
-      num = val.inMilliLitersPerSecond();
+      num = val.inMillilitersPerSecond();
     }
     snprintf(out, maxlen, format, num);
   }
