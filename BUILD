@@ -120,6 +120,17 @@ cc_test(
 )
 
 cc_test(
+    name = "mass_test",
+    srcs = glob(["test/mass_test.cpp"]),
+    linkstatic = 1,
+    size = "small",
+    deps = [
+        ":roo_quantity",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
     name = "power_test",
     srcs = glob(["test/power_test.cpp"]),
     linkstatic = 1,
