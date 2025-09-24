@@ -47,28 +47,48 @@ class Resistance {
   // Returns whether the object represents an unknown resistance.
   bool isUnknown() const { return std::isnan(resistance_); }
 
-  bool operator<(const Resistance &other) const {
+  bool operator<(const Resistance& other) const {
     return resistance_ < other.resistance_;
   }
 
-  bool operator==(const Resistance &other) const {
+  bool operator==(const Resistance& other) const {
     return resistance_ == other.resistance_;
   }
 
-  bool operator>(const Resistance &other) const {
+  bool operator>(const Resistance& other) const {
     return other.resistance_ < resistance_;
   }
 
-  bool operator<=(const Resistance &other) const {
+  bool operator<=(const Resistance& other) const {
     return !(other.resistance_ < resistance_);
   }
 
-  bool operator>=(const Resistance &other) const {
+  bool operator>=(const Resistance& other) const {
     return !(resistance_ < other.resistance_);
   }
 
-  bool operator!=(const Resistance &other) const {
+  bool operator!=(const Resistance& other) const {
     return !(resistance_ == other.resistance_);
+  }
+
+  inline Resistance& operator+=(const Resistance& other) {
+    resistance_ += other.inOhms();
+    return *this;
+  }
+
+  inline Resistance& operator-=(const Resistance& other) {
+    resistance_ -= other.inOhms();
+    return *this;
+  }
+
+  inline Resistance& operator*=(float multi) {
+    resistance_ *= multi;
+    return *this;
+  }
+
+  inline Resistance& operator/=(float div) {
+    resistance_ /= div;
+    return *this;
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
@@ -142,6 +162,14 @@ inline Resistance operator+(Resistance a, Resistance b) {
   return ResistanceInOhms(a.inOhms() + b.inOhms());
 }
 
+inline Resistance operator-(Resistance a, Resistance b) {
+  return ResistanceInOhms(a.inOhms() - b.inOhms());
+}
+
+inline Resistance operator-(Resistance a) {
+  return ResistanceInOhms(-a.inOhms());
+}
+
 inline Resistance operator*(Resistance a, float b) {
   return ResistanceInOhms(a.inOhms() * b);
 }
@@ -157,6 +185,8 @@ inline Resistance operator/(Resistance a, float b) {
 inline float operator/(Resistance a, Resistance b) {
   return a.inOhms() / b.inOhms();
 }
+
+// Vs Ohm's law.
 
 inline Voltage operator*(Resistance a, Current b) {
   return VoltageInVolts(a.inOhms() * b.inAmperes());
