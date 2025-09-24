@@ -54,6 +54,17 @@ cc_test(
 )
 
 cc_test(
+    name = "linear_density_test",
+    srcs = glob(["test/linear_density_test.cpp"]),
+    linkstatic = 1,
+    size = "small",
+    deps = [
+        ":roo_quantity",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
     name = "temperature_test",
     srcs = glob(["test/temperature_test.cpp"]),
     linkstatic = 1,
