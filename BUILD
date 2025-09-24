@@ -14,8 +14,8 @@ cc_library(
         "src",
     ],
     deps = [
-        "//lib/roo_flags",
-        "//lib/roo_logging",
-        "//lib/roo_time"
+        "@roo_flags",
+        "@roo_logging",
+        "@roo_time"
     ],
 )
