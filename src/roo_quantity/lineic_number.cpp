@@ -7,7 +7,7 @@ namespace {
 
 void LineicNumberToString(const LineicNumber& val, char* out,
                            int maxlen) {
-  sprintf(out, "%.6g/m", maxlen, val.inUnitsPerMeter());
+  snprintf(out, maxlen, "%.6g/m", val.inUnitsPerMeter());
 }
 
 }  // namespace

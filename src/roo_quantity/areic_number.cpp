@@ -6,7 +6,7 @@ namespace roo_quantity {
 namespace {
 
 void AreicNumberToString(const AreicNumber& val, char* out, int maxlen) {
-  sprintf(out, "%.6g/m²", maxlen, val.inUnitsPerSquareMeter());
+  snprintf(out, maxlen, "%.6g/m²", val.inUnitsPerSquareMeter());
 }
 
 }  // namespace
