@@ -186,6 +186,17 @@ cc_test(
 )
 
 cc_test(
+    name = "velocity_test",
+    srcs = glob(["test/velocity_test.cpp"]),
+    linkstatic = 1,
+    size = "small",
+    deps = [
+        ":roo_quantity",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
     name = "voltage_test",
     srcs = glob(["test/voltage_test.cpp"]),
     linkstatic = 1,
