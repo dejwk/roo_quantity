@@ -45,28 +45,48 @@ class Capacitance {
   // Returns whether the object represents an unknown capacitance.
   bool isUnknown() const { return std::isnan(capacitance_); }
 
-  bool operator<(const Capacitance &other) const {
+  bool operator<(const Capacitance& other) const {
     return capacitance_ < other.capacitance_;
   }
 
-  bool operator==(const Capacitance &other) const {
+  bool operator==(const Capacitance& other) const {
     return capacitance_ == other.capacitance_;
   }
 
-  bool operator>(const Capacitance &other) const {
+  bool operator>(const Capacitance& other) const {
     return other.capacitance_ < capacitance_;
   }
 
-  bool operator<=(const Capacitance &other) const {
+  bool operator<=(const Capacitance& other) const {
     return !(other.capacitance_ < capacitance_);
   }
 
-  bool operator>=(const Capacitance &other) const {
+  bool operator>=(const Capacitance& other) const {
     return !(capacitance_ < other.capacitance_);
   }
 
-  bool operator!=(const Capacitance &other) const {
+  bool operator!=(const Capacitance& other) const {
     return !(capacitance_ == other.capacitance_);
+  }
+
+  inline Capacitance& operator+=(const Capacitance& other) {
+    capacitance_ += other.inFarads();
+    return *this;
+  }
+
+  inline Capacitance& operator-=(const Capacitance& other) {
+    capacitance_ -= other.inFarads();
+    return *this;
+  }
+
+  inline Capacitance& operator*=(float multi) {
+    capacitance_ *= multi;
+    return *this;
+  }
+
+  inline Capacitance& operator/=(float div) {
+    capacitance_ /= div;
+    return *this;
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
@@ -134,6 +154,14 @@ inline Capacitance operator+(Capacitance a, Capacitance b) {
   return CapacitanceInFarads(a.inFarads() + b.inFarads());
 }
 
+inline Capacitance operator-(Capacitance a, Capacitance b) {
+  return CapacitanceInFarads(a.inFarads() - b.inFarads());
+}
+
+inline Capacitance operator-(Capacitance a) {
+  return CapacitanceInFarads(-a.inFarads());
+}
+
 inline Capacitance operator*(Capacitance a, float b) {
   return CapacitanceInFarads(a.inFarads() * b);
 }
@@ -150,6 +178,8 @@ inline float operator/(Capacitance a, Capacitance b) {
   return a.inFarads() / b.inFarads();
 }
 
+// Vs charge.
+
 inline Charge operator*(Capacitance a, Voltage b) {
   return ChargeInCoulombs(a.inFarads() * b.inVolts());
 }
@@ -160,6 +190,10 @@ inline Charge operator*(Voltage a, Capacitance b) {
 
 inline Capacitance operator/(Charge a, Voltage b) {
   return CapacitanceInFarads(a.inCoulombs() / b.inVolts());
+}
+
+inline Voltage operator/(Charge a, Capacitance b) {
+  return VoltageInVolts(a.inCoulombs() / b.inFarads());
 }
 
 }  // namespace roo_quantity
