@@ -27,7 +27,7 @@ TEST(Time, Conversion) {
   EXPECT_FLOAT_EQ(2.5f, t.inMicroseconds());
 
   t = TimeInSeconds(-2);
-    EXPECT_FLOAT_EQ(-2.0f, t.inSeconds());
+  EXPECT_FLOAT_EQ(-2.0f, t.inSeconds());
 }
 
 TEST(Time, Comparison) {
@@ -59,6 +59,16 @@ TEST(Time, Operators) {
 
   float f = t2 / t1;
   EXPECT_FLOAT_EQ(5.0f / 3.0f, f);
+}
+
+TEST(Time, AsString) {
+  EXPECT_EQ("1.5 s", TimeInSeconds(1.5f).asString());
+  EXPECT_EQ("500 ms", TimeInSeconds(0.5f).asString());
+  EXPECT_EQ("150.3 µs", TimeInSeconds(0.0001503f).asString());
+  EXPECT_EQ("20 ns", TimeInSeconds(0.00000002f).asString());
+  EXPECT_EQ("? s", UnknownTime().asString());
+  EXPECT_EQ("-2 s", TimeInSeconds(-2).asString());
+  EXPECT_EQ("0 s", TimeInSeconds(0).asString());
 }
 
 }  // namespace roo_quantity

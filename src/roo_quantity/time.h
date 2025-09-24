@@ -111,6 +111,10 @@ inline Time operator-(Time a, Time b) {
   return TimeInSeconds(a.inSeconds() - b.inSeconds());
 }
 
+inline Time operator-(Time a) {
+  return TimeInSeconds(-a.inSeconds());
+}
+
 inline Time operator*(Time a, float b) {
   return TimeInSeconds(a.inSeconds() * b);
 }
@@ -124,5 +128,7 @@ inline Time operator/(Time a, float b) {
 }
 
 inline float operator/(Time a, Time b) { return a.inSeconds() / b.inSeconds(); }
+
+roo_logging::Stream& operator<<(roo_logging::Stream& os, const Time& val);
 
 }  // namespace roo_quantity
