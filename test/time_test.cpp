@@ -59,6 +59,16 @@ TEST(Time, Operators) {
 
   float f = t2 / t1;
   EXPECT_FLOAT_EQ(5.0f / 3.0f, f);
+
+  t2 += t1;
+  EXPECT_FLOAT_EQ(4.0f, t2.inSeconds());
+  t2 -= t1;
+  EXPECT_FLOAT_EQ(2.5f, t2.inSeconds());
+
+  t2 *= 2.0f;
+  EXPECT_FLOAT_EQ(5.0f, t2.inSeconds());
+  t2 /= 2.0f;
+  EXPECT_FLOAT_EQ(2.5f, t2.inSeconds());
 }
 
 TEST(Time, AsString) {
@@ -69,6 +79,14 @@ TEST(Time, AsString) {
   EXPECT_EQ("? s", UnknownTime().asString());
   EXPECT_EQ("-2 s", TimeInSeconds(-2).asString());
   EXPECT_EQ("0 s", TimeInSeconds(0).asString());
+}
+
+TEST(Time, WithRooTime) {
+  Time t = roo_time::Seconds(3.5f);
+  EXPECT_FLOAT_EQ(3.5f, t.inSeconds());
+
+  t += roo_time::Millis(250);
+  EXPECT_FLOAT_EQ(3.75f, t.inSeconds());
 }
 
 }  // namespace roo_quantity

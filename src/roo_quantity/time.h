@@ -5,6 +5,9 @@
 #include "roo_flags.h"
 #include "roo_logging.h"
 
+// For convenience conversion from too_time::Interval.
+#include "roo_time.h"
+
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
 #include <string>
 #endif
@@ -21,6 +24,8 @@ class Time {
   // Creates a time object representing an 'unknown' time.
   Time() : time_(std::nanf("")) {}
 
+  Time(const roo_time::Interval& interval) : time_(interval.inSecondsFloat()) {}
+
   // Returns the time in seconds.
   float inSeconds() const { return time_; }
 
@@ -36,17 +41,37 @@ class Time {
   // Returns whether the object represents an unknown time.
   bool isUnknown() const { return std::isnan(time_); }
 
-  bool operator<(const Time &other) const { return time_ < other.time_; }
+  bool operator<(const Time& other) const { return time_ < other.time_; }
 
-  bool operator==(const Time &other) const { return time_ == other.time_; }
+  bool operator==(const Time& other) const { return time_ == other.time_; }
 
-  bool operator>(const Time &other) const { return other.time_ < time_; }
+  bool operator>(const Time& other) const { return other.time_ < time_; }
 
-  bool operator<=(const Time &other) const { return !(other.time_ < time_); }
+  bool operator<=(const Time& other) const { return !(other.time_ < time_); }
 
-  bool operator>=(const Time &other) const { return !(time_ < other.time_); }
+  bool operator>=(const Time& other) const { return !(time_ < other.time_); }
 
-  bool operator!=(const Time &other) const { return !(time_ == other.time_); }
+  bool operator!=(const Time& other) const { return !(time_ == other.time_); }
+
+  inline Time& operator+=(const Time& other) {
+    time_ += other.inSeconds();
+    return *this;
+  }
+
+  inline Time& operator-=(const Time& other) {
+    time_ -= other.inSeconds();
+    return *this;
+  }
+
+  inline Time& operator*=(float multi) {
+    time_ *= multi;
+    return *this;
+  }
+
+  inline Time& operator/=(float div) {
+    time_ /= div;
+    return *this;
+  }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
   // Returns the string representation of the time.
@@ -111,9 +136,7 @@ inline Time operator-(Time a, Time b) {
   return TimeInSeconds(a.inSeconds() - b.inSeconds());
 }
 
-inline Time operator-(Time a) {
-  return TimeInSeconds(-a.inSeconds());
-}
+inline Time operator-(Time a) { return TimeInSeconds(-a.inSeconds()); }
 
 inline Time operator*(Time a, float b) {
   return TimeInSeconds(a.inSeconds() * b);
