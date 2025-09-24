@@ -165,7 +165,7 @@ inline Area AreaInAcres(float area) {
 // Returns a area object equivalent to the specified area
 // expressed in acres.
 inline Area AreaInSquareInches(float area) {
-  return AreaInSquareMeters(area * 0.000645f);
+  return AreaInSquareMeters(area * 0.00064516f);
 }
 
 inline Area operator+(Area a, Area b) {
