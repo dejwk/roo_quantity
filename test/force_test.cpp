@@ -78,10 +78,14 @@ TEST(Force, Reciprocal) {
 }
 
 TEST(Force, AsString) {
-  EXPECT_EQ("1.5 N", ForceInNewtons(1.5f).asString());
+  EXPECT_EQ("1.5 MN", ForceInMegaNewtons(1.5f).asString());
   EXPECT_EQ("1.5 kN", ForceInKiloNewtons(1.5f).asString());
+  EXPECT_EQ("1.5 N", ForceInNewtons(1.5f).asString());
   EXPECT_EQ("1.5 mN", ForceInMilliNewtons(1.5f).asString());
   EXPECT_EQ("1.5 µN", ForceInMicroNewtons(1.5f).asString());
+  EXPECT_EQ("0 N", ForceInNewtons(0.0f).asString());
+  EXPECT_EQ("? N", UnknownForce().asString());
+  EXPECT_EQ("-2 N", ForceInNewtons(-2.0f).asString());
 }
 
 }  // namespace roo_quantity
