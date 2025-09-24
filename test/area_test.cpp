@@ -62,6 +62,9 @@ TEST(Area, Operators) {
   EXPECT_FLOAT_EQ(1.5f, a1.inSquareMeters());
 
   EXPECT_FLOAT_EQ(0.6f, a1 / a2);
+
+  EXPECT_FLOAT_EQ(2.0f,
+                  (AreaInSquareMeters(3.0f) / LengthInMeters(1.5f)).inMeters());
 }
 
 TEST(Area, AsString) {
