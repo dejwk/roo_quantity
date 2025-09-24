@@ -19,3 +19,14 @@ cc_library(
         "@roo_time"
     ],
 )
+
+cc_test(
+    name = "si_test",
+    srcs = glob(["test/si_test.cpp"]),
+    linkstatic = 1,
+    size = "small",
+    deps = [
+        ":roo_quantity",
+        "@googletest//:gtest_main",
+    ],
+)
