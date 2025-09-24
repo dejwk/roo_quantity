@@ -32,6 +32,17 @@ cc_test(
 )
 
 cc_test(
+    name = "areic_number_test",
+    srcs = glob(["test/areic_number_test.cpp"]),
+    linkstatic = 1,
+    size = "small",
+    deps = [
+        ":roo_quantity",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
     name = "frequency_test",
     srcs = glob(["test/frequency_test.cpp"]),
     linkstatic = 1,
@@ -54,8 +65,8 @@ cc_test(
 )
 
 cc_test(
-    name = "linear_number_density_test",
-    srcs = glob(["test/linear_number_density_test.cpp"]),
+    name = "lineic_number_test",
+    srcs = glob(["test/lineic_number_test.cpp"]),
     linkstatic = 1,
     size = "small",
     deps = [
@@ -89,17 +100,6 @@ cc_test(
 cc_test(
     name = "si_test",
     srcs = glob(["test/si_test.cpp"]),
-    linkstatic = 1,
-    size = "small",
-    deps = [
-        ":roo_quantity",
-        "@googletest//:gtest_main",
-    ],
-)
-
-cc_test(
-    name = "surface_number_density_test",
-    srcs = glob(["test/surface_number_density_test.cpp"]),
     linkstatic = 1,
     size = "small",
     deps = [
