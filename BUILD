@@ -54,8 +54,8 @@ cc_test(
 )
 
 cc_test(
-    name = "linear_density_test",
-    srcs = glob(["test/linear_density_test.cpp"]),
+    name = "linear_number_density_test",
+    srcs = glob(["test/linear_number_density_test.cpp"]),
     linkstatic = 1,
     size = "small",
     deps = [
