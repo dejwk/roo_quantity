@@ -36,24 +36,44 @@ class Charge {
   // Returns whether the object represents an unknown charge.
   bool isUnknown() const { return std::isnan(charge_); }
 
-  bool operator<(const Charge &other) const { return charge_ < other.charge_; }
+  bool operator<(const Charge& other) const { return charge_ < other.charge_; }
 
-  bool operator==(const Charge &other) const {
+  bool operator==(const Charge& other) const {
     return charge_ == other.charge_;
   }
 
-  bool operator>(const Charge &other) const { return other.charge_ < charge_; }
+  bool operator>(const Charge& other) const { return other.charge_ < charge_; }
 
-  bool operator<=(const Charge &other) const {
+  bool operator<=(const Charge& other) const {
     return !(other.charge_ < charge_);
   }
 
-  bool operator>=(const Charge &other) const {
+  bool operator>=(const Charge& other) const {
     return !(charge_ < other.charge_);
   }
 
-  bool operator!=(const Charge &other) const {
+  bool operator!=(const Charge& other) const {
     return !(charge_ == other.charge_);
+  }
+
+  inline Charge& operator+=(const Charge& other) {
+    charge_ += other.inCoulombs();
+    return *this;
+  }
+
+  inline Charge& operator-=(const Charge& other) {
+    charge_ -= other.inCoulombs();
+    return *this;
+  }
+
+  inline Charge& operator*=(float multi) {
+    charge_ *= multi;
+    return *this;
+  }
+
+  inline Charge& operator/=(float div) {
+    charge_ /= div;
+    return *this;
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
@@ -106,6 +126,12 @@ inline Charge ChargeInMicroCoulombs(float charge) {
 inline Charge operator+(Charge a, Charge b) {
   return ChargeInCoulombs(a.inCoulombs() + b.inCoulombs());
 }
+
+inline Charge operator-(Charge a, Charge b) {
+  return ChargeInCoulombs(a.inCoulombs() - b.inCoulombs());
+}
+
+inline Charge operator-(Charge a) { return ChargeInCoulombs(-a.inCoulombs()); }
 
 inline Charge operator*(Charge a, float b) {
   return ChargeInCoulombs(a.inCoulombs() * b);

@@ -6,7 +6,7 @@ namespace roo_quantity {
 namespace {
 
 void ChargeToString(const Charge& val, char* out, int maxlen) {
-  FormatSimpleSiValue(val.inCoulombs(), "A", out, maxlen);
+  FormatSimpleSiValue(val.inCoulombs(), "C", out, maxlen);
 }
 
 }  // namespace
