@@ -36,24 +36,38 @@ class Force {
   // Returns whether the object represents an unknown force.
   bool isUnknown() const { return std::isnan(force_); }
 
-  bool operator<(const Force &other) const { return force_ < other.force_; }
+  bool operator<(const Force& other) const { return force_ < other.force_; }
 
-  bool operator==(const Force &other) const {
-    return force_ == other.force_;
-  }
+  bool operator==(const Force& other) const { return force_ == other.force_; }
 
-  bool operator>(const Force &other) const { return other.force_ < force_; }
+  bool operator>(const Force& other) const { return other.force_ < force_; }
 
-  bool operator<=(const Force &other) const {
-    return !(other.force_ < force_);
-  }
+  bool operator<=(const Force& other) const { return !(other.force_ < force_); }
 
-  bool operator>=(const Force &other) const {
-    return !(force_ < other.force_);
-  }
+  bool operator>=(const Force& other) const { return !(force_ < other.force_); }
 
-  bool operator!=(const Force &other) const {
+  bool operator!=(const Force& other) const {
     return !(force_ == other.force_);
+  }
+
+  inline Force& operator+=(const Force& other) {
+    force_ += other.inNewtons();
+    return *this;
+  }
+
+  inline Force& operator-=(const Force& other) {
+    force_ -= other.inNewtons();
+    return *this;
+  }
+
+  inline Force& operator*=(float multi) {
+    force_ *= multi;
+    return *this;
+  }
+
+  inline Force& operator/=(float div) {
+    force_ /= div;
+    return *this;
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
@@ -80,6 +94,18 @@ inline Force ForceInNewtons(float force);
 
 // Returns a force object representing an unknown force.
 inline Force UnknownForce() { return Force(); }
+
+// Returns a force object equivalent to the specified force
+// expressed in gigaNewtons.
+inline Force ForceInGigaNewtons(float force) {
+  return ForceInNewtons(force * 1000000000.0f);
+}
+
+// Returns a force object equivalent to the specified force
+// expressed in megaNewtons.
+inline Force ForceInMegaNewtons(float force) {
+  return ForceInNewtons(force * 1000000.0f);
+}
 
 // Returns a force object equivalent to the specified force
 // expressed in kiloNewtons.
