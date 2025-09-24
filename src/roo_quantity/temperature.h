@@ -64,6 +64,9 @@ class Temperature {
     return !(tempC_ == other.tempC_);
   }
 
+  inline Temperature &operator+=(const TemperatureDelta &other);
+  inline Temperature &operator-=(const TemperatureDelta &other);
+
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
   // Returns the string representation of the temperature, using the unit
   // defined by the 'roo_temperature_default_unit' flag.
@@ -128,6 +131,26 @@ class TemperatureDelta {
 
   bool operator!=(const TemperatureDelta &other) const {
     return !(tempC_ == other.tempC_);
+  }
+
+  inline TemperatureDelta &operator+=(const TemperatureDelta &other) {
+    tempC_ += other.degCelcius();
+    return *this;
+  }
+
+  inline TemperatureDelta &operator-=(const TemperatureDelta &other) {
+    tempC_ -= other.degCelcius();
+    return *this;
+  }
+
+  inline TemperatureDelta &operator*=(float multi) {
+    tempC_ *= multi;
+    return *this;
+  }
+
+  inline TemperatureDelta &operator/=(float div) {
+    tempC_ /= div;
+    return *this;
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
@@ -202,14 +225,24 @@ inline TemperatureDelta TemperatureDeltaDegKelvin(float tempK) {
   return TemperatureDelta(tempK);
 }
 
-// Returns a temperature delta object approximately equal to the specified temperature
-// delta expressed in Fahrenheit degrees.
+// Returns a temperature delta object approximately equal to the specified
+// temperature delta expressed in Fahrenheit degrees.
 //
 // Due to floating-point rounding errors, and since the temperature is
 // internally stored in Celcius degrees, generally,
 // DegFahrenheit(x).degFahrenheit() != x.
 inline TemperatureDelta TemperatureDeltaDegFahrenheit(float tempF) {
   return TemperatureDeltaDegCelcius(tempF / 1.8);
+}
+
+inline Temperature &Temperature::operator+=(const TemperatureDelta &other) {
+  tempC_ += other.degCelcius();
+  return *this;
+}
+
+inline Temperature &Temperature::operator-=(const TemperatureDelta &other) {
+  tempC_ -= other.degCelcius();
+  return *this;
 }
 
 inline Temperature operator+(Temperature a, TemperatureDelta b) {
@@ -226,6 +259,14 @@ inline Temperature operator+(TemperatureDelta a, Temperature b) {
 
 inline TemperatureDelta operator+(TemperatureDelta a, TemperatureDelta b) {
   return TemperatureDeltaDegCelcius(a.degCelcius() + b.degCelcius());
+}
+
+inline TemperatureDelta operator-(TemperatureDelta a, TemperatureDelta b) {
+  return TemperatureDeltaDegCelcius(a.degCelcius() - b.degCelcius());
+}
+
+inline TemperatureDelta operator-(TemperatureDelta a) {
+  return TemperatureDeltaDegCelcius(-a.degCelcius());
 }
 
 inline TemperatureDelta operator-(Temperature a, Temperature b) {

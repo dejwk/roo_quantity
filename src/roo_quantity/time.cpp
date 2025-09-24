@@ -18,13 +18,13 @@ void TimeToString(Time val, char* out, int maxlen) {
       sign = "-";
       val = -val;
     }
-    if (val > TimeInSeconds(1.0f)) {
+    if (val >= TimeInSeconds(1.0f)) {
       format = "%s%g s";
       num = val.inSeconds();
-    } else if (val > TimeInMilliseconds(1.0f)) {
+    } else if (val >= TimeInMilliseconds(1.0f)) {
       format = "%s%g ms";
       num = val.inMilliseconds();
-    } else if (val > TimeInMicroseconds(1.0f)) {
+    } else if (val >= TimeInMicroseconds(1.0f)) {
       format = "%s%g µs";
       num = val.inMicroseconds();
     } else {

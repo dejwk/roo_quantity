@@ -3,29 +3,41 @@
 namespace roo_quantity {
 namespace {
 
-void LengthToString(const Length& val, char* out, int maxlen) {
+void LengthToString(Length val, char* out, int maxlen) {
   if (val.isUnknown()) {
     strncpy(out, "? m", maxlen);
   } else {
     const char* format;
+    const char* sign = "";
     float num;
-    if (val > LengthInMeters(1000.0f)) {
-      format = "%g km";
-      num = val.inKilometers();
-    } else if (val > LengthInMeters(1.0f)) {
-      format = "%g m";
-      num = val.inMeters();
-    } else if (val > LengthInCentimeters(10.0f)) {
-      format = "%g cm";
-      num = val.inCentimeters();
-    } else if (val > LengthInMillimeters(1.0f)) {
-      format = "%g mm";
-      num = val.inMillimeters();
-    } else {
-      format = "%g µm";
-      num = val.inMicrometers();
+    if (val.inMeters() == 0.0f) {
+      snprintf(out, maxlen, "0 m");
+      return;
     }
-    snprintf(out, maxlen, format, num);
+    if (val.inMeters() < 0) {
+      sign = "-";
+      val = -val;
+    }
+    if (val >= LengthInMeters(1000.0f)) {
+      format = "%s%g km";
+      num = val.inKilometers();
+    } else if (val >= LengthInMeters(1.0f)) {
+      format = "%s%g m";
+      num = val.inMeters();
+    } else if (val >= LengthInCentimeters(10.0f)) {
+      format = "%s%g cm";
+      num = val.inCentimeters();
+    } else if (val >= LengthInMillimeters(1.0f)) {
+      format = "%s%g mm";
+      num = val.inMillimeters();
+    } else if (val >= LengthInMicrometers(1.0f)) {
+      format = "%s%g µm";
+      num = val.inMicrometers();
+    } else {
+      format = "%s%g nm";
+      num = val.inNanometers();
+    }
+    snprintf(out, maxlen, format, sign, num);
   }
 }
 

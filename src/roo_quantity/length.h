@@ -54,24 +54,44 @@ class Length {
   // Returns whether the object represents an unknown length.
   bool isUnknown() const { return std::isnan(length_); }
 
-  bool operator<(const Length &other) const { return length_ < other.length_; }
+  bool operator<(const Length& other) const { return length_ < other.length_; }
 
-  bool operator==(const Length &other) const {
+  bool operator==(const Length& other) const {
     return length_ == other.length_;
   }
 
-  bool operator>(const Length &other) const { return other.length_ < length_; }
+  bool operator>(const Length& other) const { return other.length_ < length_; }
 
-  bool operator<=(const Length &other) const {
+  bool operator<=(const Length& other) const {
     return !(other.length_ < length_);
   }
 
-  bool operator>=(const Length &other) const {
+  bool operator>=(const Length& other) const {
     return !(length_ < other.length_);
   }
 
-  bool operator!=(const Length &other) const {
+  bool operator!=(const Length& other) const {
     return !(length_ == other.length_);
+  }
+
+  inline Length& operator+=(const Length& other) {
+    length_ += other.inMeters();
+    return *this;
+  }
+
+  inline Length& operator-=(const Length& other) {
+    length_ -= other.inMeters();
+    return *this;
+  }
+
+  inline Length& operator*=(float multi) {
+    length_ *= multi;
+    return *this;
+  }
+
+  inline Length& operator/=(float div) {
+    length_ /= div;
+    return *this;
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
@@ -160,6 +180,12 @@ inline Length LengthInLightYears(float length) {
 inline Length operator+(Length a, Length b) {
   return LengthInMeters(a.inMeters() + b.inMeters());
 }
+
+inline Length operator-(Length a, Length b) {
+  return LengthInMeters(a.inMeters() - b.inMeters());
+}
+
+inline Length operator-(Length a) { return LengthInMeters(-a.inMeters()); }
 
 inline Length operator*(Length a, float b) {
   return LengthInMeters(a.inMeters() * b);
