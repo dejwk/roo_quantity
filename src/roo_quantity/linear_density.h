@@ -50,6 +50,18 @@ class LinearDensity {
   // Returns the linear_density in units per kilometer.
   float inUnitsPerKilometer() const { return linear_density_ * 1000.0f; }
 
+  // Returns the linear_density in units per inch (DPI).
+  float inUnitsPerInch() const { return linear_density_ * 0.0254f; }
+
+  // Returns the linear_density in units per inch (DPI).
+  float inDPI() const { return inUnitsPerInch(); }
+
+  // Returns the linear_density in units per foot.
+  float inUnitsPerFoot() const { return linear_density_ * 0.3048f; }
+
+  // Returns the linear_density in units per yard.
+  float inUnitsPerYard() const { return linear_density_ * 0.9144f; }
+
   // Returns whether the object represents an unknown linear_density.
   bool isUnknown() const { return std::isnan(linear_density_); }
 
@@ -165,6 +177,24 @@ inline LinearDensity LinearDensityInUnitsPerMillimeter(float linear_density) {
 // expressed in units per kilometer.
 inline LinearDensity LinearDensityInUnitsPerKilometer(float linear_density) {
   return LinearDensityInUnitsPerMeter(linear_density * 0.001f);
+}
+
+// Returns a linear_density object equivalent to the specified linear_density
+// expressed in units per inch.
+inline LinearDensity LinearDensityInUnitsPerInch(float linear_density) {
+  return LinearDensityInUnitsPerMeter(linear_density * 39.37007874f);
+}
+
+// Returns a linear_density object equivalent to the specified linear_density
+// expressed in units per foot.
+inline LinearDensity LinearDensityInUnitsPerFoot(float linear_density) {
+  return LinearDensityInUnitsPerMeter(linear_density * 3.280839895f);
+}
+
+// Returns a linear_density object equivalent to the specified linear_density
+// expressed in units per yard.
+inline LinearDensity LinearDensityInUnitsPerYard(float linear_density) {
+  return LinearDensityInUnitsPerMeter(linear_density * 1.0936132983f);
 }
 
 inline LinearDensity operator*(LinearDensity a, float b) {

@@ -4,7 +4,7 @@
 
 namespace roo_quantity {
 
-TEST(LinearDensity, UnitConversion) {
+TEST(LinearDensity, ConversionSi) {
   LinearDensity ld = LinearDensityInUnitsPerMeter(1.5f);
   EXPECT_FLOAT_EQ(1.5f, ld.inUnitsPerMeter());
   EXPECT_FLOAT_EQ(0.0015f, ld.inKiloUnitsPerMeter());
@@ -33,6 +33,23 @@ TEST(LinearDensity, UnitConversion) {
 
   ld = LinearDensityInUnitsPerKilometer(2);
   EXPECT_FLOAT_EQ(0.002f, ld.inUnitsPerMeter());
+}
+
+TEST(LinearDensity, ConversionNonSi) {
+  LinearDensity ld = LinearDensityInUnitsPerMeter(1.0f);
+  EXPECT_FLOAT_EQ(1.0f, ld.inUnitsPerMeter());
+  EXPECT_FLOAT_EQ(0.0254f, ld.inUnitsPerInch());
+  EXPECT_FLOAT_EQ(0.3048f, ld.inUnitsPerFoot());
+  EXPECT_FLOAT_EQ(0.9144f, ld.inUnitsPerYard());
+
+  ld = LinearDensityInUnitsPerInch(0.0254f);
+  EXPECT_FLOAT_EQ(1.0f, ld.inUnitsPerMeter());
+
+  ld = LinearDensityInUnitsPerFoot(0.3048f);
+  EXPECT_FLOAT_EQ(1.0f, ld.inUnitsPerMeter());
+
+  ld = LinearDensityInUnitsPerYard(0.9144f);
+  EXPECT_FLOAT_EQ(1.0f, ld.inUnitsPerMeter());
 }
 
 TEST(LinearDensity, Comparison) {
