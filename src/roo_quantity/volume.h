@@ -76,6 +76,26 @@ class Volume {
     return !(volume_ == other.volume_);
   }
 
+  inline Volume &operator+=(const Volume &other) {
+    volume_ += other.inCubicMeters();
+    return *this;
+  }
+
+  inline Volume &operator-=(const Volume &other) {
+    volume_ -= other.inCubicMeters();
+    return *this;
+  }
+
+  inline Volume &operator*=(float multi) {
+    volume_ *= multi;
+    return *this;
+  }
+
+  inline Volume &operator/=(float div) {
+    volume_ /= div;
+    return *this;
+  }
+
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
   // Returns the string representation of the volume.
   std::string asString() const;
@@ -126,9 +146,9 @@ inline Volume VolumeInCubicDecimeters(float volume) {
 // Returns a volume object equivalent to the specified volume
 // expressed in milliliters.
 inline Volume VolumeInMilliliters(float volume) {
-    return VolumeInCubicMeters(volume * 0.000001f);
-  }
-  
+  return VolumeInCubicMeters(volume * 0.000001f);
+}
+
 // Returns a volume object equivalent to the specified volume
 // expressed in milliliters.
 inline Volume VolumeInCubicCentimeters(float volume) {
@@ -155,6 +175,14 @@ inline Volume VolumeInCubicInches(float volume) {
 
 inline Volume operator+(Volume a, Volume b) {
   return VolumeInCubicMeters(a.inCubicMeters() + b.inCubicMeters());
+}
+
+inline Volume operator-(Volume a, Volume b) {
+  return VolumeInCubicMeters(a.inCubicMeters() - b.inCubicMeters());
+}
+
+inline Volume operator-(Volume a) {
+  return VolumeInCubicMeters(-a.inCubicMeters());
 }
 
 inline Volume operator*(Volume a, float b) {

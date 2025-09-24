@@ -85,3 +85,14 @@ cc_test(
         "@googletest//:gtest_main",
     ],
 )
+
+cc_test(
+    name = "volume_test",
+    srcs = glob(["test/volume_test.cpp"]),
+    linkstatic = 1,
+    size = "small",
+    deps = [
+        ":roo_quantity",
+        "@googletest//:gtest_main",
+    ],
+)
