@@ -98,6 +98,17 @@ cc_test(
 )
 
 cc_test(
+    name = "surface_number_density_test",
+    srcs = glob(["test/surface_number_density_test.cpp"]),
+    linkstatic = 1,
+    size = "small",
+    deps = [
+        ":roo_quantity",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
     name = "volume_test",
     srcs = glob(["test/volume_test.cpp"]),
     linkstatic = 1,
