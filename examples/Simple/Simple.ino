@@ -4,9 +4,6 @@
 
 #include "roo_logging.h"
 #include "roo_quantity.h"
-#include "roo_quantity/length.h"
-#include "roo_quantity/temperature.h"
-#include "roo_quantity/velocity.h"
 
 using namespace roo_quantity;
 
