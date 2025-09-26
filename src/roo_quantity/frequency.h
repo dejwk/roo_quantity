@@ -40,6 +40,19 @@ class Frequency {
   // Returns the frequency in microHertz.
   float inMicroHertz() const { return frequency_ * 1000000.0f; }
 
+  // Returns the rotational frequency in radians per second.
+  float inRadiansPerSecond() const { return frequency_ * 2.0f * M_PI; }
+
+  // Returns the rotational frequency in cycles per second (equivalent
+  // to Hertz).
+  float inCyclesPerSecond() const { return inHertz(); }
+
+  // Returns the rotational frequency in RPM.
+  float inRevolutionsPerMinute() const { return frequency_ * 60.0f; }
+
+  // Returns the rotational frequency in RPM.
+  float inRPM() const { return inRevolutionsPerMinute(); }
+
   // Returns whether the object represents an unknown frequency.
   bool isUnknown() const { return std::isnan(frequency_); }
 
@@ -136,6 +149,24 @@ inline Frequency FrequencyInMilliHertz(float frequency) {
 // expressed in microHertz.
 inline Frequency FrequencyInMicroHertz(float frequency) {
   return FrequencyInHertz(frequency * 0.000001f);
+}
+
+// Returns a frequency object equivalent to the specified rotational frequency
+// expressed in radians per second.
+inline Frequency FrequencyInRadiansPerSecond(float omega) {
+  return FrequencyInHertz(omega * 0.1591549430918f);
+}
+
+// Returns a frequency object equivalent to the specified rotational frequency
+// expressed in revolutions per minute (RPM).
+inline Frequency FrequencyInRevolutionsPerMinute(float frequency) {
+  return FrequencyInHertz(frequency * 0.016666666666666666f);
+}
+
+// Returns a frequency object equivalent to the specified rotational frequency
+// expressed in revolutions per minute (RPM).
+inline Frequency FrequencyInRPM(float frequency) {
+  return FrequencyInRevolutionsPerMinute(frequency);
 }
 
 inline Frequency operator*(Frequency a, float b) {

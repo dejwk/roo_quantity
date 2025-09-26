@@ -4,7 +4,7 @@
 
 namespace roo_quantity {
 
-TEST(Frequency, UnitConversion) {
+TEST(Frequency, ConversionSi) {
   Frequency f = FrequencyInHertz(1.5f);
   EXPECT_FLOAT_EQ(1.5f, f.inHertz());
   EXPECT_FLOAT_EQ(0.0015f, f.inKiloHertz());
@@ -31,6 +31,19 @@ TEST(Frequency, UnitConversion) {
 
   f = FrequencyInGigaHertz(2);
   EXPECT_FLOAT_EQ(2000000000.0f, f.inHertz());
+}
+
+TEST(Frequency, ConversionNonSi) {
+  Frequency f = FrequencyInRPM(60.0f);
+  EXPECT_FLOAT_EQ(1.0f, f.inHertz());
+  EXPECT_FLOAT_EQ(60.0f, f.inRevolutionsPerMinute());
+  EXPECT_FLOAT_EQ(60.0f, f.inRPM());
+  EXPECT_FLOAT_EQ(2.0f * M_PI, f.inRadiansPerSecond());
+
+  f = FrequencyInRadiansPerSecond(2.0f * M_PI);
+  EXPECT_FLOAT_EQ(1.0f, f.inHertz());
+  EXPECT_FLOAT_EQ(60.0f, f.inRevolutionsPerMinute());
+  EXPECT_FLOAT_EQ(60.0f, f.inRPM());
 }
 
 TEST(Frequency, Comparison) {
