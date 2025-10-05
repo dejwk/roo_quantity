@@ -5,7 +5,7 @@
 #include "roo_flags.h"
 #include "roo_logging.h"
 
-// For convenience conversion from too_time::Interval.
+// For convenience conversion from roo_time::Duration.
 #include "roo_time.h"
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
@@ -24,7 +24,7 @@ class Time {
   // Creates a time object representing an 'unknown' time.
   Time() : time_(std::nanf("")) {}
 
-  Time(const roo_time::Interval& interval) : time_(interval.inSecondsFloat()) {}
+  Time(const roo_time::Duration& duration) : time_(duration.inSecondsFloat()) {}
 
   // Returns the time in seconds.
   float inSeconds() const { return time_; }
