@@ -5,7 +5,7 @@ namespace {
 
 void PressureToString(Pressure val, char* out, int maxlen) {
   if (val.isUnknown()) {
-    strncpy(out, "? m", maxlen);
+    strncpy(out, "? Pa", maxlen);
   } else {
     const char* format;
     const char* sign = "";
