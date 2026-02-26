@@ -31,6 +31,25 @@ TEST(Temperature, Comparison) {
   EXPECT_TRUE(TemperatureDegCelcius(20.0f) != TemperatureDegCelcius(30.0f));
 }
 
+TEST(TemperatureDelta, Conversion) {
+  TemperatureDelta dt = TemperatureDeltaDegCelcius(10.0f);
+  EXPECT_FLOAT_EQ(10.0f, dt.degCelcius());
+  EXPECT_FLOAT_EQ(10.0f, dt.degKelvin());
+  EXPECT_FLOAT_EQ(18.0f, dt.degFahrenheit());
+
+  dt = TemperatureDeltaDegKelvin(12.5f);
+  EXPECT_FLOAT_EQ(12.5f, dt.degCelcius());
+  EXPECT_FLOAT_EQ(22.5f, dt.degFahrenheit());
+
+  dt = TemperatureDeltaDegFahrenheit(18.0f);
+  EXPECT_FLOAT_EQ(10.0f, dt.degCelcius());
+  EXPECT_FLOAT_EQ(10.0f, dt.degKelvin());
+
+  dt = TemperatureDeltaDegFahrenheit(-18.0f);
+  EXPECT_FLOAT_EQ(-10.0f, dt.degCelcius());
+  EXPECT_FLOAT_EQ(-10.0f, dt.degKelvin());
+}
+
 TEST(Temperature, Operators) {
   Temperature t1 = TemperatureDegCelcius(20.0f);
   Temperature t2 = TemperatureDegCelcius(30.0f);
