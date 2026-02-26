@@ -15,25 +15,25 @@
 
 namespace roo_quantity {
 
-// Representation of work, internally stored as floating-point Joules.
+/// Representation of work, internally stored as floating-point Joules.
 class Work {
  public:
-  // Creates a work object representing an 'unknown' work.
+  /// Creates a work object representing an 'unknown' work.
   Work() : work_(std::nanf("")) {}
 
-  // Returns the work in kilojoules.
+  /// Returns the work in kilojoules.
   float inKiloJoules() const { return work_ / 1000.0f; }
 
-  // Returns the work in joules.
+  /// Returns the work in joules.
   float inJoules() const { return work_; }
 
-  // Returns the work in millijoules.
+  /// Returns the work in millijoules.
   float inMilliJoules() const { return work_ * 1000.0f; }
 
-  // Returns the work in microjoules.
+  /// Returns the work in microjoules.
   float inMicroJoules() const { return work_ * 1000000.0f; }
 
-  // Returns whether the object represents an unknown work.
+  /// Returns whether the object represents an unknown work.
   bool isUnknown() const { return std::isnan(work_); }
 
   bool operator<(const Work& other) const { return work_ < other.work_; }
@@ -69,7 +69,7 @@ class Work {
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
-  // Returns the string representation of the work.
+  /// Returns the string representation of the work.
   std::string asString() const;
 #endif
 
@@ -84,45 +84,45 @@ class Work {
 
   explicit Work(float work) : work_(work) {}
 
-  // Stored in joules.
+  /// Stored in joules.
   float work_;
 };
 
 inline Work WorkInJoules(float work);
 
-// Returns a work object representing an unknown work.
+/// Returns a work object representing an unknown work.
 inline Work UnknownWork() { return Work(); }
 
-// Returns a work object equivalent to the specified work
-// expressed in gigaJoules.
+/// Returns a work object equivalent to the specified work
+/// expressed in gigaJoules.
 inline Work WorkInGigaJoules(float work) {
   return WorkInJoules(work * 1000000000.0f);
 }
 
-// Returns a work object equivalent to the specified work
-// expressed in megaJoules.
+/// Returns a work object equivalent to the specified work
+/// expressed in megaJoules.
 inline Work WorkInMegaJoules(float work) {
   return WorkInJoules(work * 1000000.0f);
 }
 
-// Returns a work object equivalent to the specified work
-// expressed in kiloJoules.
+/// Returns a work object equivalent to the specified work
+/// expressed in kiloJoules.
 inline Work WorkInKiloJoules(float work) {
   return WorkInJoules(work * 1000.0f);
 }
 
-// Returns a work object equivalent to the specified work
-// expressed in Joules.
+/// Returns a work object equivalent to the specified work
+/// expressed in Joules.
 inline Work WorkInJoules(float work) { return Work(work); }
 
-// Returns a work object equivalent to the specified work
-// expressed in milliJoules.
+/// Returns a work object equivalent to the specified work
+/// expressed in milliJoules.
 inline Work WorkInMilliJoules(float work) {
   return WorkInJoules(work / 1000.0f);
 }
 
-// Returns a work object equivalent to the specified work
-// expressed in microJoules.
+/// Returns a work object equivalent to the specified work
+/// expressed in microJoules.
 inline Work WorkInMicroJoules(float work) {
   return WorkInJoules(work / 1000000.0f);
 }

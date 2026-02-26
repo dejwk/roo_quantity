@@ -17,26 +17,26 @@
 
 namespace roo_quantity {
 
-// Representation of volume flow rate, internally stored as floating-point
-// cubic meters per second.
+/// Representation of volume flow rate, internally stored as floating-point
+/// cubic meters per second.
 class VolumeFlowRate {
  public:
-  // Creates a volume flow rate object representing an 'unknown' volume flow
-  // rate.
+  /// Creates a volume flow rate object representing an 'unknown' volume flow
+  /// rate.
   VolumeFlowRate() : volume_flow_rate_(std::nanf("")) {}
 
-  // Returns the volume flow rate in cubic meters per second.
+  /// Returns the volume flow rate in cubic meters per second.
   float inCubicMetersPerSecond() const { return volume_flow_rate_; }
 
-  // Returns the volume flow rate in liters per second.
+  /// Returns the volume flow rate in liters per second.
   float inLitersPerSecond() const { return volume_flow_rate_ * 1000.0f; }
 
-  // Returns the volume flow rate in milliliters per second.
+  /// Returns the volume flow rate in milliliters per second.
   float inMillilitersPerSecond() const {
     return volume_flow_rate_ * 1000000.0f;
   }
 
-  // Returns whether the object represents an unknown volume flow rate.
+  /// Returns whether the object represents an unknown volume flow rate.
   bool isUnknown() const { return std::isnan(volume_flow_rate_); }
 
   bool operator<(const VolumeFlowRate& other) const {
@@ -84,7 +84,7 @@ class VolumeFlowRate {
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
-  // Returns the string representation of the volume flow rate.
+  /// Returns the string representation of the volume flow rate.
   std::string asString() const;
 #endif
 
@@ -100,31 +100,31 @@ class VolumeFlowRate {
   explicit VolumeFlowRate(float volume_flow_rate)
       : volume_flow_rate_(volume_flow_rate) {}
 
-  // Stored in cubic meters per second.
+  /// Stored in cubic meters per second.
   float volume_flow_rate_;
 };
 
 inline VolumeFlowRate VolumeFlowRateInCubicMetersPerSecond(
     float volume_flow_rate);
 
-// Returns a volume flow rate object representing an unknown volume flow rate.
+/// Returns a volume flow rate object representing an unknown volume flow rate.
 inline VolumeFlowRate UnknownVolumeFlowRate() { return VolumeFlowRate(); }
 
-// Returns a volume flow rate object equivalent to the specified volume flow
-// rate expressed in cubic meters per second.
+/// Returns a volume flow rate object equivalent to the specified volume flow
+/// rate expressed in cubic meters per second.
 inline VolumeFlowRate VolumeFlowRateInCubicMetersPerSecond(
     float volume_flow_rate) {
   return VolumeFlowRate(volume_flow_rate);
 }
 
-// Returns a volume flow rate object equivalent to the specified volume flow
-// rate expressed in liters per second.
+/// Returns a volume flow rate object equivalent to the specified volume flow
+/// rate expressed in liters per second.
 inline VolumeFlowRate VolumeFlowRateInLitersPerSecond(float volume_flow_rate) {
   return VolumeFlowRateInCubicMetersPerSecond(volume_flow_rate * 0.001f);
 }
 
-// Returns a volume flow rate object equivalent to the specified volume flow
-// rate expressed in milliliters per second.
+/// Returns a volume flow rate object equivalent to the specified volume flow
+/// rate expressed in milliliters per second.
 inline VolumeFlowRate VolumeFlowRateInMillilitersPerSecond(
     float volume_flow_rate) {
   return VolumeFlowRateInCubicMetersPerSecond(volume_flow_rate * 0.000001f);

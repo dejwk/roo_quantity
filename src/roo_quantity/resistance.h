@@ -17,34 +17,34 @@
 
 namespace roo_quantity {
 
-// Representation of resistance, internally stored as floating-point Ohms.
+/// Representation of resistance, internally stored as floating-point Ohms.
 class Resistance {
  public:
-  // Creates a resistance object representing an 'unknown' resistance.
+  /// Creates a resistance object representing an 'unknown' resistance.
   Resistance() : resistance_(std::nanf("")) {}
 
-  // Returns the resistance in GigaOhms.
+  /// Returns the resistance in GigaOhms.
   float inGigaOhms() const { return resistance_ * 0.000000001f; }
 
-  // Returns the resistance in MegaOhms.
+  /// Returns the resistance in MegaOhms.
   float inMegaOhms() const { return resistance_ * 0.000001f; }
 
-  // Returns the resistance in kiloOhms.
+  /// Returns the resistance in kiloOhms.
   float inKiloOhms() const { return resistance_ * 0.001f; }
 
-  // Returns the resistance in Ohms.
+  /// Returns the resistance in Ohms.
   float inOhms() const { return resistance_; }
 
-  // Returns the resistance in milliOhms.
+  /// Returns the resistance in milliOhms.
   float inMilliOhms() const { return resistance_ * 1000.0f; }
 
-  // Returns the resistance in microOhms.
+  /// Returns the resistance in microOhms.
   float inMicroOhms() const { return resistance_ * 1000000.0f; }
 
-  // Returns the resistance in nanoOhms.
+  /// Returns the resistance in nanoOhms.
   float inNanoOhms() const { return resistance_ * 1000000000.0f; }
 
-  // Returns whether the object represents an unknown resistance.
+  /// Returns whether the object represents an unknown resistance.
   bool isUnknown() const { return std::isnan(resistance_); }
 
   bool operator<(const Resistance& other) const {
@@ -92,7 +92,7 @@ class Resistance {
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
-  // Returns the string representation of the resistance.
+  /// Returns the string representation of the resistance.
   std::string asString() const;
 #endif
 
@@ -107,53 +107,53 @@ class Resistance {
 
   explicit Resistance(float resistance) : resistance_(resistance) {}
 
-  // Stored in Ohms.
+  /// Stored in Ohms.
   float resistance_;
 };
 
 inline Resistance ResistanceInOhms(float resistance);
 
-// Returns a resistance object representing an unknown resistance.
+/// Returns a resistance object representing an unknown resistance.
 inline Resistance UnknownResistance() { return Resistance(); }
 
-// Returns a resistance object equivalent to the specified resistance
-// expressed in GigaOhms.
+/// Returns a resistance object equivalent to the specified resistance
+/// expressed in GigaOhms.
 inline Resistance ResistanceInGigaOhms(float resistance) {
   return ResistanceInOhms(resistance * 1000000000.0f);
 }
 
-// Returns a resistance object equivalent to the specified resistance
-// expressed in MegaOhms.
+/// Returns a resistance object equivalent to the specified resistance
+/// expressed in MegaOhms.
 inline Resistance ResistanceInMegaOhms(float resistance) {
   return ResistanceInOhms(resistance * 1000000.0f);
 }
 
-// Returns a resistance object equivalent to the specified resistance
-// expressed in kiloOhms.
+/// Returns a resistance object equivalent to the specified resistance
+/// expressed in kiloOhms.
 inline Resistance ResistanceInKiloOhms(float resistance) {
   return ResistanceInOhms(resistance * 1000.0f);
 }
 
-// Returns a resistance object equivalent to the specified resistance
-// expressed in Ohms.
+/// Returns a resistance object equivalent to the specified resistance
+/// expressed in Ohms.
 inline Resistance ResistanceInOhms(float resistance) {
   return Resistance(resistance);
 }
 
-// Returns a resistance object equivalent to the specified resistance
-// expressed in milliOhms.
+/// Returns a resistance object equivalent to the specified resistance
+/// expressed in milliOhms.
 inline Resistance ResistanceInMilliOhms(float resistance) {
   return ResistanceInOhms(resistance * 0.001f);
 }
 
-// Returns a resistance object equivalent to the specified resistance
-// expressed in microOhms.
+/// Returns a resistance object equivalent to the specified resistance
+/// expressed in microOhms.
 inline Resistance ResistanceInMicroOhms(float resistance) {
   return ResistanceInOhms(resistance * 0.000001f);
 }
 
-// Returns a resistance object equivalent to the specified resistance
-// expressed in microOhms.
+/// Returns a resistance object equivalent to the specified resistance
+/// expressed in microOhms.
 inline Resistance ResistanceInNanoOhms(float resistance) {
   return ResistanceInOhms(resistance * 0.000000001f);
 }
@@ -186,7 +186,7 @@ inline float operator/(Resistance a, Resistance b) {
   return a.inOhms() / b.inOhms();
 }
 
-// Vs Ohm's law.
+/// Vs Ohm's law.
 
 inline Voltage operator*(Resistance a, Current b) {
   return VoltageInVolts(a.inOhms() * b.inAmperes());

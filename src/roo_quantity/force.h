@@ -18,25 +18,25 @@
 
 namespace roo_quantity {
 
-// Representation of force, internally stored as floating-point Newtons.
+/// Representation of force, internally stored as floating-point Newtons.
 class Force {
  public:
-  // Creates a force object representing an 'unknown' force.
+  /// Creates a force object representing an 'unknown' force.
   Force() : force_(std::nanf("")) {}
 
-  // Returns the force in kiloNewtons.
+  /// Returns the force in kiloNewtons.
   float inKiloNewtons() const { return force_ / 1000.0f; }
 
-  // Returns the force in Newtons.
+  /// Returns the force in Newtons.
   float inNewtons() const { return force_; }
 
-  // Returns the force in milliNewtons.
+  /// Returns the force in milliNewtons.
   float inMilliNewtons() const { return force_ * 1000.0f; }
 
-  // Returns the force in microNewtons.
+  /// Returns the force in microNewtons.
   float inMicroNewtons() const { return force_ * 1000000.0f; }
 
-  // Returns whether the object represents an unknown force.
+  /// Returns whether the object represents an unknown force.
   bool isUnknown() const { return std::isnan(force_); }
 
   bool operator<(const Force& other) const { return force_ < other.force_; }
@@ -74,7 +74,7 @@ class Force {
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
-  // Returns the string representation of the force.
+  /// Returns the string representation of the force.
   std::string asString() const;
 #endif
 
@@ -89,45 +89,45 @@ class Force {
 
   explicit Force(float force) : force_(force) {}
 
-  // Stored in Newtons.
+  /// Stored in Newtons.
   float force_;
 };
 
 inline Force ForceInNewtons(float force);
 
-// Returns a force object representing an unknown force.
+/// Returns a force object representing an unknown force.
 inline Force UnknownForce() { return Force(); }
 
-// Returns a force object equivalent to the specified force
-// expressed in gigaNewtons.
+/// Returns a force object equivalent to the specified force
+/// expressed in gigaNewtons.
 inline Force ForceInGigaNewtons(float force) {
   return ForceInNewtons(force * 1000000000.0f);
 }
 
-// Returns a force object equivalent to the specified force
-// expressed in megaNewtons.
+/// Returns a force object equivalent to the specified force
+/// expressed in megaNewtons.
 inline Force ForceInMegaNewtons(float force) {
   return ForceInNewtons(force * 1000000.0f);
 }
 
-// Returns a force object equivalent to the specified force
-// expressed in kiloNewtons.
+/// Returns a force object equivalent to the specified force
+/// expressed in kiloNewtons.
 inline Force ForceInKiloNewtons(float force) {
   return ForceInNewtons(force * 1000.0f);
 }
 
-// Returns a force object equivalent to the specified force
-// expressed in Newtons.
+/// Returns a force object equivalent to the specified force
+/// expressed in Newtons.
 inline Force ForceInNewtons(float force) { return Force(force); }
 
-// Returns a force object equivalent to the specified force
-// expressed in milliNewtons.
+/// Returns a force object equivalent to the specified force
+/// expressed in milliNewtons.
 inline Force ForceInMilliNewtons(float force) {
   return ForceInNewtons(force / 1000.0f);
 }
 
-// Returns a force object equivalent to the specified force
-// expressed in microNewtons.
+/// Returns a force object equivalent to the specified force
+/// expressed in microNewtons.
 inline Force ForceInMicroNewtons(float force) {
   return ForceInNewtons(force / 1000000.0f);
 }

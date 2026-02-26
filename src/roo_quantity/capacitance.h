@@ -18,31 +18,31 @@
 
 namespace roo_quantity {
 
-// Representation of capacitance, internally stored as floating-point Farads.
+/// Representation of capacitance, internally stored as floating-point Farads.
 class Capacitance {
  public:
-  // Creates a capacitance object representing an 'unknown' capacitance.
+  /// Creates a capacitance object representing an 'unknown' capacitance.
   Capacitance() : capacitance_(std::nanf("")) {}
 
-  // Returns the capacitance in kiloFarads.
+  /// Returns the capacitance in kiloFarads.
   float inKiloFarads() const { return capacitance_ * 0.001f; }
 
-  // Returns the capacitance in Farads.
+  /// Returns the capacitance in Farads.
   float inFarads() const { return capacitance_; }
 
-  // Returns the capacitance in milliFarads.
+  /// Returns the capacitance in milliFarads.
   float inMilliFarads() const { return capacitance_ * 1000.0f; }
 
-  // Returns the capacitance in microFarads.
+  /// Returns the capacitance in microFarads.
   float inMicroFarads() const { return capacitance_ * 1000000.0f; }
 
-  // Returns the capacitance in nanoFarads.
+  /// Returns the capacitance in nanoFarads.
   float inNanoFarads() const { return capacitance_ * 1000000000.0f; }
 
-  // Returns the capacitance in picoFarads.
+  /// Returns the capacitance in picoFarads.
   float inPicoFarads() const { return capacitance_ * 1000000000000.0f; }
 
-  // Returns whether the object represents an unknown capacitance.
+  /// Returns whether the object represents an unknown capacitance.
   bool isUnknown() const { return std::isnan(capacitance_); }
 
   bool operator<(const Capacitance& other) const {
@@ -90,7 +90,7 @@ class Capacitance {
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
-  // Returns the string representation of the capacitance.
+  /// Returns the string representation of the capacitance.
   std::string asString() const;
 #endif
 
@@ -105,47 +105,47 @@ class Capacitance {
 
   explicit Capacitance(float capacitance) : capacitance_(capacitance) {}
 
-  // Stored in Farads.
+  /// Stored in Farads.
   float capacitance_;
 };
 
 inline Capacitance CapacitanceInFarads(float capacitance);
 
-// Returns a capacitance object representing an unknown capacitance.
+/// Returns a capacitance object representing an unknown capacitance.
 inline Capacitance UnknownCapacitance() { return Capacitance(); }
 
-// Returns a capacitance object equivalent to the specified capacitance
-// expressed in kiloFarads.
+/// Returns a capacitance object equivalent to the specified capacitance
+/// expressed in kiloFarads.
 inline Capacitance CapacitanceInKiloFarads(float capacitance) {
   return CapacitanceInFarads(capacitance * 1000.0f);
 }
 
-// Returns a capacitance object equivalent to the specified capacitance
-// expressed in Farads.
+/// Returns a capacitance object equivalent to the specified capacitance
+/// expressed in Farads.
 inline Capacitance CapacitanceInFarads(float capacitance) {
   return Capacitance(capacitance);
 }
 
-// Returns a capacitance object equivalent to the specified capacitance
-// expressed in milliFarads.
+/// Returns a capacitance object equivalent to the specified capacitance
+/// expressed in milliFarads.
 inline Capacitance CapacitanceInMilliFarads(float capacitance) {
   return CapacitanceInFarads(capacitance * 0.001f);
 }
 
-// Returns a capacitance object equivalent to the specified capacitance
-// expressed in microFarads.
+/// Returns a capacitance object equivalent to the specified capacitance
+/// expressed in microFarads.
 inline Capacitance CapacitanceInMicroFarads(float capacitance) {
   return CapacitanceInFarads(capacitance * 0.000001f);
 }
 
-// Returns a capacitance object equivalent to the specified capacitance
-// expressed in nanoFarads.
+/// Returns a capacitance object equivalent to the specified capacitance
+/// expressed in nanoFarads.
 inline Capacitance CapacitanceInNanoFarads(float capacitance) {
   return CapacitanceInFarads(capacitance * 0.000000001f);
 }
 
-// Returns a capacitance object equivalent to the specified capacitance
-// expressed in picoFarads.
+/// Returns a capacitance object equivalent to the specified capacitance
+/// expressed in picoFarads.
 inline Capacitance CapacitanceInPicoFarads(float capacitance) {
   return CapacitanceInFarads(capacitance * 0.000000000001f);
 }
@@ -178,7 +178,7 @@ inline float operator/(Capacitance a, Capacitance b) {
   return a.inFarads() / b.inFarads();
 }
 
-// Vs charge.
+/// Vs charge.
 
 inline Charge operator*(Capacitance a, Voltage b) {
   return ChargeInCoulombs(a.inFarads() * b.inVolts());

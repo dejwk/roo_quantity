@@ -15,46 +15,46 @@
 
 namespace roo_quantity {
 
-// Representation of length, internally stored as floating-point meters.
+/// Representation of length, internally stored as floating-point meters.
 class Length {
  public:
-  // Creates a length object representing an 'unknown' length.
+  /// Creates a length object representing an 'unknown' length.
   Length() : length_(std::nanf("")) {}
 
-  // Returns the length in kilometers.
+  /// Returns the length in kilometers.
   float inKilometers() const { return length_ * 0.001f; }
 
-  // Returns the length in meters.
+  /// Returns the length in meters.
   float inMeters() const { return length_; }
 
-  // Returns the length in decimeters.
+  /// Returns the length in decimeters.
   float inDecimeters() const { return length_ * 10.0f; }
 
-  // Returns the length in centimeters.
+  /// Returns the length in centimeters.
   float inCentimeters() const { return length_ * 100.0f; }
 
-  // Returns the length in millimeters.
+  /// Returns the length in millimeters.
   float inMillimeters() const { return length_ * 1000.0f; }
 
-  // Returns the length in micrometers.
+  /// Returns the length in micrometers.
   float inMicrometers() const { return length_ * 1000000.0f; }
 
-  // Returns the length in nanometers.
+  /// Returns the length in nanometers.
   float inNanometers() const { return length_ * 1000000000.0f; }
 
-  // Returns the length in inches.
+  /// Returns the length in inches.
   float inInches() const { return length_ * 39.37007874f; }
 
-  // Returns the length in feet.
+  /// Returns the length in feet.
   float inFeet() const { return length_ * 3.280839895f; }
 
-  // Returns the length in yards.
+  /// Returns the length in yards.
   float inYards() const { return length_ * 1.0936132983f; }
 
-  // Returns the length in light years.
+  /// Returns the length in light years.
   float inLightYears() const { return length_ * 1.057000834E-16f; }
 
-  // Returns whether the object represents an unknown length.
+  /// Returns whether the object represents an unknown length.
   bool isUnknown() const { return std::isnan(length_); }
 
   bool operator<(const Length& other) const { return length_ < other.length_; }
@@ -98,7 +98,7 @@ class Length {
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
-  // Returns the string representation of the length.
+  /// Returns the string representation of the length.
   std::string asString() const;
 #endif
 
@@ -113,75 +113,75 @@ class Length {
 
   explicit Length(float length) : length_(length) {}
 
-  // Stored in meters.
+  /// Stored in meters.
   float length_;
 };
 
 inline Length LengthInMeters(float length);
 
-// Returns a length object representing an unknown length.
+/// Returns a length object representing an unknown length.
 inline Length UnknownLength() { return Length(); }
 
-// Returns a length object equivalent to the specified length
-// expressed in kilometers.
+/// Returns a length object equivalent to the specified length
+/// expressed in kilometers.
 inline Length LengthInKilometers(float length) {
   return LengthInMeters(length * 1000.0f);
 }
 
-// Returns a length object equivalent to the specified length
-// expressed in meters.
+/// Returns a length object equivalent to the specified length
+/// expressed in meters.
 inline Length LengthInMeters(float length) { return Length(length); }
 
-// Returns a length object equivalent to the specified length
-// expressed in centimeters.
+/// Returns a length object equivalent to the specified length
+/// expressed in decimeters.
 inline Length LengthInDecimeters(float length) {
   return LengthInMeters(length * 0.1f);
 }
 
-// Returns a length object equivalent to the specified length
-// expressed in centimeters.
+/// Returns a length object equivalent to the specified length
+/// expressed in centimeters.
 inline Length LengthInCentimeters(float length) {
   return LengthInMeters(length * 0.01f);
 }
 
-// Returns a length object equivalent to the specified length
-// expressed in millimeters.
+/// Returns a length object equivalent to the specified length
+/// expressed in millimeters.
 inline Length LengthInMillimeters(float length) {
   return LengthInMeters(length * 0.001f);
 }
 
-// Returns a length object equivalent to the specified length
-// expressed in micrometers.
+/// Returns a length object equivalent to the specified length
+/// expressed in micrometers.
 inline Length LengthInMicrometers(float length) {
   return LengthInMeters(length * 0.000001f);
 }
 
-// Returns a length object equivalent to the specified length
-// expressed in nanometers.
+/// Returns a length object equivalent to the specified length
+/// expressed in nanometers.
 inline Length LengthInNanometers(float length) {
   return LengthInMeters(length * 0.000000001f);
 }
 
-// Returns a length object equivalent to the specified length
-// expressed in inches.
+/// Returns a length object equivalent to the specified length
+/// expressed in inches.
 inline Length LengthInInches(float length) {
   return LengthInMeters(length * 0.0254f);
 }
 
-// Returns a length object equivalent to the specified length
-// expressed in feet.
+/// Returns a length object equivalent to the specified length
+/// expressed in feet.
 inline Length LengthInFeet(float length) {
   return LengthInMeters(length * 0.3048f);
 }
 
-// Returns a length object equivalent to the specified length
-// expressed in yards.
+/// Returns a length object equivalent to the specified length
+/// expressed in yards.
 inline Length LengthInYards(float length) {
   return LengthInMeters(length * 0.9144f);
 }
 
-// Returns a length object equivalent to the specified length
-// expressed in light years.
+/// Returns a length object equivalent to the specified length
+/// expressed in light years.
 inline Length LengthInLightYears(float length) {
   return LengthInMeters(length * 9460730472580044.0f);
 }

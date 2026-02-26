@@ -16,44 +16,44 @@
 
 namespace roo_quantity {
 
-// Representation of frequency, internally stored as floating-point Hertz.
+/// Representation of frequency, internally stored as floating-point Hertz.
 class Frequency {
  public:
-  // Creates a frequency object representing an 'unknown' frequency.
+  /// Creates a frequency object representing an 'unknown' frequency.
   Frequency() : frequency_(std::nanf("")) {}
 
-  // Returns the frequency in GigaHertz.
+  /// Returns the frequency in GigaHertz.
   float inGigaHertz() const { return frequency_ * 0.000000001f; }
 
-  // Returns the frequency in MegaHertz.
+  /// Returns the frequency in MegaHertz.
   float inMegaHertz() const { return frequency_ * 0.000001f; }
 
-  // Returns the frequency in kiloHertz.
+  /// Returns the frequency in kiloHertz.
   float inKiloHertz() const { return frequency_ * 0.001f; }
 
-  // Returns the frequency in Hertz.
+  /// Returns the frequency in Hertz.
   float inHertz() const { return frequency_; }
 
-  // Returns the frequency in milliHertz.
+  /// Returns the frequency in milliHertz.
   float inMilliHertz() const { return frequency_ * 1000.0f; }
 
-  // Returns the frequency in microHertz.
+  /// Returns the frequency in microHertz.
   float inMicroHertz() const { return frequency_ * 1000000.0f; }
 
-  // Returns the rotational frequency in radians per second.
+  /// Returns the rotational frequency in radians per second.
   float inRadiansPerSecond() const { return frequency_ * 2.0f * M_PI; }
 
-  // Returns the rotational frequency in cycles per second (equivalent
-  // to Hertz).
+  /// Returns the rotational frequency in cycles per second (equivalent
+  /// to Hertz).
   float inCyclesPerSecond() const { return inHertz(); }
 
-  // Returns the rotational frequency in RPM.
+  /// Returns the rotational frequency in RPM.
   float inRevolutionsPerMinute() const { return frequency_ * 60.0f; }
 
-  // Returns the rotational frequency in RPM.
+  /// Returns the rotational frequency in RPM.
   float inRPM() const { return inRevolutionsPerMinute(); }
 
-  // Returns whether the object represents an unknown frequency.
+  /// Returns whether the object represents an unknown frequency.
   bool isUnknown() const { return std::isnan(frequency_); }
 
   bool operator<(const Frequency &other) const {
@@ -91,7 +91,7 @@ class Frequency {
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
-  // Returns the string representation of the frequency.
+  /// Returns the string representation of the frequency.
   std::string asString() const;
 #endif
 
@@ -106,65 +106,65 @@ class Frequency {
 
   explicit Frequency(float frequency) : frequency_(frequency) {}
 
-  // Stored in Hertz.
+  /// Stored in Hertz.
   float frequency_;
 };
 
 inline Frequency FrequencyInHertz(float frequency);
 
-// Returns a frequency object representing an unknown frequency.
+/// Returns a frequency object representing an unknown frequency.
 inline Frequency UnknownFrequency() { return Frequency(); }
 
-// Returns a frequency object equivalent to the specified frequency
-// expressed in gigaHertz.
+/// Returns a frequency object equivalent to the specified frequency
+/// expressed in gigaHertz.
 inline Frequency FrequencyInGigaHertz(float frequency) {
   return FrequencyInHertz(frequency * 1000000000.0f);
 }
 
-// Returns a frequency object equivalent to the specified frequency
-// expressed in megaHertz.
+/// Returns a frequency object equivalent to the specified frequency
+/// expressed in megaHertz.
 inline Frequency FrequencyInMegaHertz(float frequency) {
   return FrequencyInHertz(frequency * 1000000.0f);
 }
 
-// Returns a frequency object equivalent to the specified frequency
-// expressed in kiloHertz.
+/// Returns a frequency object equivalent to the specified frequency
+/// expressed in kiloHertz.
 inline Frequency FrequencyInKiloHertz(float frequency) {
   return FrequencyInHertz(frequency * 1000.0f);
 }
 
-// Returns a frequency object equivalent to the specified frequency
-// expressed in Hertz.
+/// Returns a frequency object equivalent to the specified frequency
+/// expressed in Hertz.
 inline Frequency FrequencyInHertz(float frequency) {
   return Frequency(frequency);
 }
 
-// Returns a frequency object equivalent to the specified frequency
-// expressed in milliHertz.
+/// Returns a frequency object equivalent to the specified frequency
+/// expressed in milliHertz.
 inline Frequency FrequencyInMilliHertz(float frequency) {
   return FrequencyInHertz(frequency * 0.001f);
 }
 
-// Returns a frequency object equivalent to the specified frequency
-// expressed in microHertz.
+/// Returns a frequency object equivalent to the specified frequency
+/// expressed in microHertz.
 inline Frequency FrequencyInMicroHertz(float frequency) {
   return FrequencyInHertz(frequency * 0.000001f);
 }
 
-// Returns a frequency object equivalent to the specified rotational frequency
-// expressed in radians per second.
+/// Returns a frequency object equivalent to the specified rotational frequency
+/// expressed in radians per second.
 inline Frequency FrequencyInRadiansPerSecond(float omega) {
   return FrequencyInHertz(omega * 0.1591549430918f);
 }
 
-// Returns a frequency object equivalent to the specified rotational frequency
-// expressed in revolutions per minute (RPM).
+/// Returns a frequency object equivalent to the specified rotational frequency
+/// expressed in revolutions per minute (RPM).
 inline Frequency FrequencyInRevolutionsPerMinute(float frequency) {
   return FrequencyInHertz(frequency * 0.016666666666666666f);
 }
 
-// Returns a frequency object equivalent to the specified rotational frequency
-// expressed in revolutions per minute (RPM).
+/// Returns a frequency object equivalent to the specified rotational frequency
+/// expressed in revolutions per minute (RPM).
 inline Frequency FrequencyInRPM(float frequency) {
   return FrequencyInRevolutionsPerMinute(frequency);
 }

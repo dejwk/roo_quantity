@@ -16,54 +16,54 @@
 
 namespace roo_quantity {
 
-// Representation of lineic number, a reciprocal of length, internally
-// stored as floating-point units per meter.
+/// Representation of lineic number, a reciprocal of length, internally
+/// stored as floating-point units per meter.
 class LineicNumber {
  public:
-  // Creates a lineic number object representing an 'unknown'
-  // lineic number.
+  /// Creates a lineic number object representing an 'unknown'
+  /// lineic number.
   LineicNumber() : lineic_number_(std::nanf("")) {}
 
-  // Returns the lineic number in GigaUnitsPerMeter.
+  /// Returns the lineic number in GigaUnitsPerMeter.
   float inGigaUnitsPerMeter() const { return lineic_number_ * 0.000000001f; }
 
-  // Returns the lineic number in Mega-units per meter.
+  /// Returns the lineic number in Mega-units per meter.
   float inMegaUnitsPerMeter() const { return lineic_number_ * 0.000001f; }
 
-  // Returns the lineic number in kilo-units per meter.
+  /// Returns the lineic number in kilo-units per meter.
   float inKiloUnitsPerMeter() const { return lineic_number_ * 0.001f; }
 
-  // Returns the lineic number in units per meter.
+  /// Returns the lineic number in units per meter.
   float inUnitsPerMeter() const { return lineic_number_; }
 
-  // Returns the lineic number in milli-units per meter.
+  /// Returns the lineic number in milli-units per meter.
   float inMilliUnitsPerMeter() const { return lineic_number_ * 1000.0f; }
 
-  // Returns the lineic number in micro-units per meter.
+  /// Returns the lineic number in micro-units per meter.
   float inMicroUnitsPerMeter() const { return lineic_number_ * 1000000.0f; }
 
-  // Returns the lineic number in units per centimeter.
+  /// Returns the lineic number in units per centimeter.
   float inUnitsPerCentimeter() const { return lineic_number_ * 0.01f; }
 
-  // Returns the lineic number in units per millimeter.
+  /// Returns the lineic number in units per millimeter.
   float inUnitsPerMillimeter() const { return lineic_number_ * 0.001f; }
 
-  // Returns the lineic number in units per kilometer.
+  /// Returns the lineic number in units per kilometer.
   float inUnitsPerKilometer() const { return lineic_number_ * 1000.0f; }
 
-  // Returns the lineic number in units per inch (DPI).
+  /// Returns the lineic number in units per inch (DPI).
   float inUnitsPerInch() const { return lineic_number_ * 0.0254f; }
 
-  // Returns the lineic number in units per inch (DPI).
+  /// Returns the lineic number in units per inch (DPI).
   float inDPI() const { return inUnitsPerInch(); }
 
-  // Returns the lineic number in units per foot.
+  /// Returns the lineic number in units per foot.
   float inUnitsPerFoot() const { return lineic_number_ * 0.3048f; }
 
-  // Returns the lineic number in units per yard.
+  /// Returns the lineic number in units per yard.
   float inUnitsPerYard() const { return lineic_number_ * 0.9144f; }
 
-  // Returns whether the object represents an unknown lineic number.
+  /// Returns whether the object represents an unknown lineic number.
   bool isUnknown() const { return std::isnan(lineic_number_); }
 
   bool operator<(const LineicNumber &other) const {
@@ -101,7 +101,7 @@ class LineicNumber {
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
-  // Returns the string representation of the lineic number.
+  /// Returns the string representation of the lineic number.
   std::string asString() const;
 #endif
 
@@ -116,84 +116,84 @@ class LineicNumber {
 
   explicit LineicNumber(float lineic_number) : lineic_number_(lineic_number) {}
 
-  // Stored in units per meter.
+  /// Stored in units per meter.
   float lineic_number_;
 };
 
 inline LineicNumber LineicNumberInUnitsPerMeter(float lineic_number);
 
-// Returns a lineic number object representing an unknown
-// lineic number.
+/// Returns a lineic number object representing an unknown
+/// lineic number.
 inline LineicNumber UnknownLineicNumber() { return LineicNumber(); }
 
-// Returns a lineic number object equivalent to the specified
-// lineic number expressed in giga-units per meter.
+/// Returns a lineic number object equivalent to the specified
+/// lineic number expressed in giga-units per meter.
 inline LineicNumber LineicNumberInGigaUnitsPerMeter(float lineic_number) {
   return LineicNumberInUnitsPerMeter(lineic_number * 1000000000.0f);
 }
 
-// Returns a lineic number object equivalent to the specified
-// lineic number expressed in mega-units per meter.
+/// Returns a lineic number object equivalent to the specified
+/// lineic number expressed in mega-units per meter.
 inline LineicNumber LineicNumberInMegaUnitsPerMeter(float lineic_number) {
   return LineicNumberInUnitsPerMeter(lineic_number * 1000000.0f);
 }
 
-// Returns a lineic number object equivalent to the specified
-// lineic number expressed in kilo-units per meter.
+/// Returns a lineic number object equivalent to the specified
+/// lineic number expressed in kilo-units per meter.
 inline LineicNumber LineicNumberInKiloUnitsPerMeter(float lineic_number) {
   return LineicNumberInUnitsPerMeter(lineic_number * 1000.0f);
 }
 
-// Returns a lineic number object equivalent to the specified
-// lineic number expressed in units per meter.
+/// Returns a lineic number object equivalent to the specified
+/// lineic number expressed in units per meter.
 inline LineicNumber LineicNumberInUnitsPerMeter(float lineic_number) {
   return LineicNumber(lineic_number);
 }
 
-// Returns a lineic number object equivalent to the specified
-// lineic number expressed in milli-units per meter.
+/// Returns a lineic number object equivalent to the specified
+/// lineic number expressed in milli-units per meter.
 inline LineicNumber LineicNumberInMilliUnitsPerMeter(float lineic_number) {
   return LineicNumberInUnitsPerMeter(lineic_number * 0.001f);
 }
 
-// Returns a lineic number object equivalent to the specified
-// lineic number expressed in micro-units per meter.
+/// Returns a lineic number object equivalent to the specified
+/// lineic number expressed in micro-units per meter.
 inline LineicNumber LineicNumberInMicroUnitsPerMeter(float lineic_number) {
   return LineicNumberInUnitsPerMeter(lineic_number * 0.000001f);
 }
 
-// Returns a lineic number object equivalent to the specified
-// lineic number expressed in units per centimeter.
+/// Returns a lineic number object equivalent to the specified
+/// lineic number expressed in units per centimeter.
 inline LineicNumber LineicNumberInUnitsPerCentimeter(float lineic_number) {
   return LineicNumberInUnitsPerMeter(lineic_number * 100.0f);
 }
 
-// Returns a lineic number object equivalent to the specified
-// lineic number expressed in units per millimeter.
+/// Returns a lineic number object equivalent to the specified
+/// lineic number expressed in units per millimeter.
 inline LineicNumber LineicNumberInUnitsPerMillimeter(float lineic_number) {
   return LineicNumberInUnitsPerMeter(lineic_number * 1000.0f);
 }
 
-// Returns a lineic number object equivalent to the specified
-// lineic number expressed in units per kilometer.
+/// Returns a lineic number object equivalent to the specified
+/// lineic number expressed in units per kilometer.
 inline LineicNumber LineicNumberInUnitsPerKilometer(float lineic_number) {
   return LineicNumberInUnitsPerMeter(lineic_number * 0.001f);
 }
 
-// Returns a lineic number object equivalent to the specified
-// lineic number expressed in units per inch.
+/// Returns a lineic number object equivalent to the specified
+/// lineic number expressed in units per inch.
 inline LineicNumber LineicNumberInUnitsPerInch(float lineic_number) {
   return LineicNumberInUnitsPerMeter(lineic_number * 39.37007874f);
 }
 
-// Returns a lineic number object equivalent to the specified
-// lineic number expressed in units per foot.
+/// Returns a lineic number object equivalent to the specified
+/// lineic number expressed in units per foot.
 inline LineicNumber LineicNumberInUnitsPerFoot(float lineic_number) {
   return LineicNumberInUnitsPerMeter(lineic_number * 3.280839895f);
 }
 
-// Returns a lineic number object equivalent to the specified
-// lineic number expressed in units per yard.
+/// Returns a lineic number object equivalent to the specified
+/// lineic number expressed in units per yard.
 inline LineicNumber LineicNumberInUnitsPerYard(float lineic_number) {
   return LineicNumberInUnitsPerMeter(lineic_number * 1.0936132983f);
 }

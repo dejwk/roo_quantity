@@ -17,25 +17,25 @@
 
 namespace roo_quantity {
 
-// Representation of voltage, internally stored as floating-point Volts.
+/// Representation of voltage, internally stored as floating-point Volts.
 class Voltage {
  public:
-  // Creates a voltage object representing an 'unknown' voltage.
+  /// Creates a voltage object representing an 'unknown' voltage.
   Voltage() : voltage_(std::nanf("")) {}
 
-  // Returns the voltage in kiloVolts.
+  /// Returns the voltage in kiloVolts.
   float inKiloVolts() const { return voltage_ * 0.001f; }
 
-  // Returns the voltage in Volts.
+  /// Returns the voltage in Volts.
   float inVolts() const { return voltage_; }
 
-  // Returns the voltage in milliVolts.
+  /// Returns the voltage in milliVolts.
   float inMilliVolts() const { return voltage_ * 1000.0f; }
 
-  // Returns the voltage in microVolts.
+  /// Returns the voltage in microVolts.
   float inMicroVolts() const { return voltage_ * 1000000.0f; }
 
-  // Returns whether the object represents an unknown voltage.
+  /// Returns whether the object represents an unknown voltage.
   bool isUnknown() const { return std::isnan(voltage_); }
 
   bool operator<(const Voltage& other) const {
@@ -83,7 +83,7 @@ class Voltage {
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
-  // Returns the string representation of the voltage.
+  /// Returns the string representation of the voltage.
   std::string asString() const;
 #endif
 
@@ -98,33 +98,33 @@ class Voltage {
 
   explicit Voltage(float voltage) : voltage_(voltage) {}
 
-  // Stored in Volts.
+  /// Stored in Volts.
   float voltage_;
 };
 
 inline Voltage VoltageInVolts(float voltage);
 
-// Returns a voltage object representing an unknown voltage.
+/// Returns a voltage object representing an unknown voltage.
 inline Voltage UnknownVoltage() { return Voltage(); }
 
-// Returns a voltage object equivalent to the specified voltage
-// expressed in kiloVolts.
+/// Returns a voltage object equivalent to the specified voltage
+/// expressed in kiloVolts.
 inline Voltage VoltageInKiloVolts(float voltage) {
   return VoltageInVolts(voltage * 1000.0f);
 }
 
-// Returns a voltage object equivalent to the specified voltage
-// expressed in Volts.
+/// Returns a voltage object equivalent to the specified voltage
+/// expressed in Volts.
 inline Voltage VoltageInVolts(float voltage) { return Voltage(voltage); }
 
-// Returns a voltage object equivalent to the specified voltage
-// expressed in milliVolts.
+/// Returns a voltage object equivalent to the specified voltage
+/// expressed in milliVolts.
 inline Voltage VoltageInMilliVolts(float voltage) {
   return VoltageInVolts(voltage * 0.001f);
 }
 
-// Returns a voltage object equivalent to the specified voltage
-// expressed in microVolts.
+/// Returns a voltage object equivalent to the specified voltage
+/// expressed in microVolts.
 inline Voltage VoltageInMicroVolts(float voltage) {
   return VoltageInVolts(voltage * 0.000001f);
 }
@@ -155,7 +155,7 @@ inline float operator/(Voltage a, Voltage b) {
   return a.inVolts() / b.inVolts();
 }
 
-// Vs power.
+/// Vs power.
 
 inline Power operator*(Voltage a, Current b) {
   return PowerInWatts(a.inVolts() * b.inAmperes());
@@ -173,7 +173,7 @@ inline Current operator/(Power a, Voltage b) {
   return CurrentInAmperes(a.inWatts() / b.inVolts());
 }
 
-// Vs work.
+/// Vs work.
 
 inline Work operator*(Voltage a, Charge b) {
   return WorkInJoules(a.inVolts() * b.inCoulombs());

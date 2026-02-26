@@ -15,25 +15,25 @@
 
 namespace roo_quantity {
 
-// Representation of charge, internally stored as floating-point Coulombs.
+/// Representation of charge, internally stored as floating-point Coulombs.
 class Charge {
  public:
-  // Creates a charge object representing an 'unknown' charge.
+  /// Creates a charge object representing an 'unknown' charge.
   Charge() : charge_(std::nanf("")) {}
 
-  // Returns the charge in kiloCoulombs.
+  /// Returns the charge in kiloCoulombs.
   float inKiloCoulombs() const { return charge_ / 1000.0f; }
 
-  // Returns the charge in Coulombs.
+  /// Returns the charge in Coulombs.
   float inCoulombs() const { return charge_; }
 
-  // Returns the charge in milliCoulombs.
+  /// Returns the charge in milliCoulombs.
   float inMilliCoulombs() const { return charge_ * 1000.0f; }
 
-  // Returns the charge in microCoulombs.
+  /// Returns the charge in microCoulombs.
   float inMicroCoulombs() const { return charge_ * 1000000.0f; }
 
-  // Returns whether the object represents an unknown charge.
+  /// Returns whether the object represents an unknown charge.
   bool isUnknown() const { return std::isnan(charge_); }
 
   bool operator<(const Charge& other) const { return charge_ < other.charge_; }
@@ -77,7 +77,7 @@ class Charge {
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
-  // Returns the string representation of the charge.
+  /// Returns the string representation of the charge.
   std::string asString() const;
 #endif
 
@@ -92,33 +92,33 @@ class Charge {
 
   explicit Charge(float charge) : charge_(charge) {}
 
-  // Stored in Coulombs.
+  /// Stored in Coulombs.
   float charge_;
 };
 
 inline Charge ChargeInCoulombs(float charge);
 
-// Returns a charge object representing an unknown charge.
+/// Returns a charge object representing an unknown charge.
 inline Charge UnknownCharge() { return Charge(); }
 
-// Returns a charge object equivalent to the specified charge
-// expressed in kiloCoulombs.
+/// Returns a charge object equivalent to the specified charge
+/// expressed in kiloCoulombs.
 inline Charge ChargeInKiloCoulombs(float charge) {
   return ChargeInCoulombs(charge * 1000.0f);
 }
 
-// Returns a charge object equivalent to the specified charge
-// expressed in Coulombs.
+/// Returns a charge object equivalent to the specified charge
+/// expressed in Coulombs.
 inline Charge ChargeInCoulombs(float charge) { return Charge(charge); }
 
-// Returns a charge object equivalent to the specified charge
-// expressed in milliCoulombs.
+/// Returns a charge object equivalent to the specified charge
+/// expressed in milliCoulombs.
 inline Charge ChargeInMilliCoulombs(float charge) {
   return ChargeInCoulombs(charge * 0.001f);
 }
 
-// Returns a charge object equivalent to the specified charge
-// expressed in microCoulombs.
+/// Returns a charge object equivalent to the specified charge
+/// expressed in microCoulombs.
 inline Charge ChargeInMicroCoulombs(float charge) {
   return ChargeInCoulombs(charge * 0.000001f);
 }

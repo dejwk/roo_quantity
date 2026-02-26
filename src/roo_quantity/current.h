@@ -17,28 +17,28 @@
 
 namespace roo_quantity {
 
-// Representation of current, internally stored as floating-point Amperes.
+/// Representation of current, internally stored as floating-point Amperes.
 class Current {
  public:
-  // Creates a current object representing an 'unknown' current.
+  /// Creates a current object representing an 'unknown' current.
   Current() : current_(std::nanf("")) {}
 
-  // Returns the current in megaAmperes.
+  /// Returns the current in megaAmperes.
   float inMegaAmperes() const { return current_ / 1000000.0f; }
 
-  // Returns the current in kiloAmperes.
+  /// Returns the current in kiloAmperes.
   float inKiloAmperes() const { return current_ / 1000.0f; }
 
-  // Returns the current in Amperes.
+  /// Returns the current in Amperes.
   float inAmperes() const { return current_; }
 
-  // Returns the current in milliAmperes.
+  /// Returns the current in milliAmperes.
   float inMilliAmperes() const { return current_ * 1000.0f; }
 
-  // Returns the current in microAmperes.
+  /// Returns the current in microAmperes.
   float inMicroAmperes() const { return current_ * 1000000.0f; }
 
-  // Returns whether the object represents an unknown current.
+  /// Returns whether the object represents an unknown current.
   bool isUnknown() const { return std::isnan(current_); }
 
   bool operator<(const Current& other) const {
@@ -86,7 +86,7 @@ class Current {
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
-  // Returns the string representation of the current.
+  /// Returns the string representation of the current.
   std::string asString() const;
 #endif
 
@@ -101,39 +101,39 @@ class Current {
 
   explicit Current(float current) : current_(current) {}
 
-  // Stored in Amperes.
+  /// Stored in Amperes.
   float current_;
 };
 
 inline Current CurrentInAmperes(float current);
 
-// Returns a current object representing an unknown current.
+/// Returns a current object representing an unknown current.
 inline Current UnknownCurrent() { return Current(); }
 
-// Returns a current object equivalent to the specified current
-// expressed in megaAmperes.
+/// Returns a current object equivalent to the specified current
+/// expressed in megaAmperes.
 inline Current CurrentInMegaAmperes(float current) {
   return CurrentInAmperes(current * 1000000.0f);
 }
 
-// Returns a current object equivalent to the specified current
-// expressed in kiloAmperes.
+/// Returns a current object equivalent to the specified current
+/// expressed in kiloAmperes.
 inline Current CurrentInKiloAmperes(float current) {
   return CurrentInAmperes(current * 1000.0f);
 }
 
-// Returns a current object equivalent to the specified current
-// expressed in Amperes.
+/// Returns a current object equivalent to the specified current
+/// expressed in Amperes.
 inline Current CurrentInAmperes(float current) { return Current(current); }
 
-// Returns a current object equivalent to the specified current
-// expressed in milliAmperes.
+/// Returns a current object equivalent to the specified current
+/// expressed in milliAmperes.
 inline Current CurrentInMilliAmperes(float current) {
   return CurrentInAmperes(current * 0.001f);
 }
 
-// Returns a current object equivalent to the specified current
-// expressed in microAmperes.
+/// Returns a current object equivalent to the specified current
+/// expressed in microAmperes.
 inline Current CurrentInMicroAmperes(float current) {
   return CurrentInAmperes(current * 0.000001f);
 }
@@ -164,7 +164,7 @@ inline float operator/(Current a, Current b) {
   return a.inAmperes() / b.inAmperes();
 }
 
-// Vs charge.
+/// Vs charge.
 
 inline Charge operator*(Current a, Time b) {
   return ChargeInCoulombs(a.inAmperes() * b.inSeconds());

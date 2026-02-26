@@ -18,40 +18,40 @@
 
 namespace roo_quantity {
 
-// Representation of pressure, internally stored as floating-point Pascals.
+/// Representation of pressure, internally stored as floating-point Pascals.
 class Pressure {
  public:
-  // Creates a pressure object representing an 'unknown' pressure.
+  /// Creates a pressure object representing an 'unknown' pressure.
   Pressure() : pressure_(std::nanf("")) {}
 
-  // Returns the pressure in GigaPascals.
+  /// Returns the pressure in GigaPascals.
   float inGigaPascals() const { return pressure_ * 0.000000001f; }
 
-  // Returns the pressure in MegaPascals.
+  /// Returns the pressure in MegaPascals.
   float inMegaPascals() const { return pressure_ * 0.000001f; }
 
-  // Returns the pressure in bars.
+  /// Returns the pressure in bars.
   float inBars() const { return pressure_ * 0.00001f; }
 
-  // Returns the pressure in kiloPascals.
+  /// Returns the pressure in kiloPascals.
   float inKiloPascals() const { return pressure_ * 0.001f; }
 
-  // Returns the pressure in HectoPascals.
+  /// Returns the pressure in HectoPascals.
   float inHectoPascals() const { return pressure_ * 0.01f; }
 
-  // Returns the pressure in Pascals.
+  /// Returns the pressure in Pascals.
   float inPascals() const { return pressure_; }
 
-  // Returns the pressure in milliPascals.
+  /// Returns the pressure in milliPascals.
   float inMilliPascals() const { return pressure_ * 1000.0f; }
 
-  // Returns the pressure in microPascals.
+  /// Returns the pressure in microPascals.
   float inMicroPascals() const { return pressure_ * 1000000.0f; }
 
-  // Returns the pressure in PSI (pound per square inch).
+  /// Returns the pressure in PSI (pound per square inch).
   float inPSI() const { return pressure_ * 0.0001450377f; }
 
-  // Returns whether the object represents an unknown pressure.
+  /// Returns whether the object represents an unknown pressure.
   bool isUnknown() const { return std::isnan(pressure_); }
 
   bool operator<(const Pressure& other) const {
@@ -99,7 +99,7 @@ class Pressure {
   }
 
 #if defined(ESP32) || defined(ESP8266) || defined(__linux__)
-  // Returns the string representation of the pressure.
+  /// Returns the string representation of the pressure.
   std::string asString() const;
 #endif
 
@@ -114,63 +114,63 @@ class Pressure {
 
   explicit Pressure(float pressure) : pressure_(pressure) {}
 
-  // Stored in Pascals.
+  /// Stored in Pascals.
   float pressure_;
 };
 
 inline Pressure PressureInPascals(float pressure);
 
-// Returns a pressure object representing an unknown pressure.
+/// Returns a pressure object representing an unknown pressure.
 inline Pressure UnknownPressure() { return Pressure(); }
 
-// Returns a pressure object equivalent to the specified pressure
-// expressed in GigaPascals.
+/// Returns a pressure object equivalent to the specified pressure
+/// expressed in GigaPascals.
 inline Pressure PressureInGigaPascals(float pressure) {
   return PressureInPascals(pressure * 1000000000.0f);
 }
 
-// Returns a pressure object equivalent to the specified pressure
-// expressed in MegaPascals.
+/// Returns a pressure object equivalent to the specified pressure
+/// expressed in MegaPascals.
 inline Pressure PressureInMegaPascals(float pressure) {
   return PressureInPascals(pressure * 1000000.0f);
 }
 
-// Returns a pressure object equivalent to the specified pressure
-// expressed in bars.
+/// Returns a pressure object equivalent to the specified pressure
+/// expressed in bars.
 inline Pressure PressureInBars(float pressure) {
   return PressureInPascals(pressure * 100000.0f);
 }
 
-// Returns a pressure object equivalent to the specified pressure
-// expressed in kiloPascals.
+/// Returns a pressure object equivalent to the specified pressure
+/// expressed in kiloPascals.
 inline Pressure PressureInKiloPascals(float pressure) {
   return PressureInPascals(pressure * 1000.0f);
 }
 
-// Returns a pressure object equivalent to the specified pressure
-// expressed in hectoPascals.
+/// Returns a pressure object equivalent to the specified pressure
+/// expressed in hectoPascals.
 inline Pressure PressureInHectoPascals(float pressure) {
   return PressureInPascals(pressure * 100.0f);
 }
 
-// Returns a pressure object equivalent to the specified pressure
-// expressed in Pascals.
+/// Returns a pressure object equivalent to the specified pressure
+/// expressed in Pascals.
 inline Pressure PressureInPascals(float pressure) { return Pressure(pressure); }
 
-// Returns a pressure object equivalent to the specified pressure
-// expressed in milliPascals.
+/// Returns a pressure object equivalent to the specified pressure
+/// expressed in milliPascals.
 inline Pressure PressureInMilliPascals(float pressure) {
   return PressureInPascals(pressure * 0.001f);
 }
 
-// Returns a pressure object equivalent to the specified pressure
-// expressed in microPascals.
+/// Returns a pressure object equivalent to the specified pressure
+/// expressed in microPascals.
 inline Pressure PressureInMicroPascals(float pressure) {
   return PressureInPascals(pressure * 0.000001f);
 }
 
-// Returns a pressure object equivalent to the specified pressure
-// expressed in PSI (pounds per square inch).
+/// Returns a pressure object equivalent to the specified pressure
+/// expressed in PSI (pounds per square inch).
 inline Pressure PressureInPSI(float pressure) {
   return PressureInPascals(pressure * 6894.7572932f);
 }
