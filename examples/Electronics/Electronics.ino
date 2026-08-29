@@ -27,7 +27,7 @@ void loop() {
   // Random capacitance between 0 and 4.7µF.
   Capacitance c = CapacitanceInNanoFarads(rand() % 4700);
   Serial.println("Capacitance " + c.asArduinoString());
-  Serial.printf("Charge at %s: %s %s\n", u.asString().c_str(),
+  Serial.printf("Charge at %s: %s\n", u.asString().c_str(),
                 (c * u).asString().c_str());
 
   delay(1000);
