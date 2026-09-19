@@ -1,3 +1,11 @@
+# roo_quantity 1.1.10
+
+- Updated Roo dependencies to `roo_flags` 1.2.5, `roo_logging` 1.5.10, and `roo_time` 2.0.0 in Bazel and PlatformIO.
+- Upgraded Bazel dependencies to `rules_cc` 0.2.25 and GoogleTest 1.18.0.bcr.1; updated testing and CI to `roo_testing` 2.1.2.
+- Added consolidated release notes for previous releases.
+
+---
+
 # [roo_quantity 1.1.9](https://github.com/dejwk/roo_quantity/releases/tag/1.1.9)
 
 Published 2026-08-29.
