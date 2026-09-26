@@ -1,3 +1,11 @@
+# roo_quantity 1.1.11
+
+- Update `roo_logging` to 1.5.11 and `roo_time` to 2.0.1, including PlatformIO minimum versions.
+- Upgrade `roo_testing` to 2.3.0.
+- Add an ESP-IDF ESP32 build profile, automatic profile selection for ESP-IDF example runs, and a helper to test both Arduino and ESP-IDF profiles.
+
+---
+
 # roo_quantity 1.1.10
 
 - Updated Roo dependencies to `roo_flags` 1.2.5, `roo_logging` 1.5.10, and `roo_time` 2.0.0 in Bazel and PlatformIO.
