@@ -74,4 +74,14 @@ TEST(Volume, AsString) {
   EXPECT_EQ("1.5 km³", VolumeInCubicKilometers(1.5f).asString());
 }
 
+// Verifies that each cutoff selects its own unit for either sign.
+TEST(Volume, AsStringAtUnitCutoffs) {
+  EXPECT_EQ("1 km³", VolumeInCubicKilometers(1.0f).asString());
+  EXPECT_EQ("1 m³", VolumeInCubicMeters(1.0f).asString());
+  EXPECT_EQ("-1 m³", VolumeInCubicMeters(-1.0f).asString());
+  EXPECT_EQ("-1 dm³", VolumeInCubicDecimeters(-1.0f).asString());
+  EXPECT_EQ("1 ml", VolumeInMilliliters(1.0f).asString());
+  EXPECT_EQ("-1 mm³", VolumeInCubicMillimeters(-1.0f).asString());
+}
+
 }  // namespace roo_quantity

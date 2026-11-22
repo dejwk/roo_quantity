@@ -4,6 +4,9 @@
 - Breaking API correction. Multiplying `VolumicNumber` by `Length` in either
   order now returns `AreicNumber` in units per square meter. Update explicit
   `LineicNumber` assignments and use the corresponding areic unit accessors.
+- Correct conversion from square meters to hectares.
+- Area, volume, and volume flow rate select display units by magnitude and
+  switch units at the exact cutoff.
 
 ---
 

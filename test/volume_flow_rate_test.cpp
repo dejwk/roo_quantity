@@ -70,4 +70,18 @@ TEST(VolumeFlowRate, AsString) {
   EXPECT_EQ("1.5 mL/s", VolumeFlowRateInMillilitersPerSecond(1.5f).asString());
 }
 
+// Verifies that the same units are selected at and above the cutoffs for
+// positive and negative flows, including large values in scientific notation.
+TEST(VolumeFlowRate, AsStringUsesMagnitude) {
+  EXPECT_EQ("1 m³/s", VolumeFlowRateInCubicMetersPerSecond(1.0f).asString());
+  EXPECT_EQ("-1 m³/s", VolumeFlowRateInCubicMetersPerSecond(-1.0f).asString());
+  EXPECT_EQ("-2 m³/s", VolumeFlowRateInCubicMetersPerSecond(-2.0f).asString());
+  EXPECT_EQ("1 L/s", VolumeFlowRateInLitersPerSecond(1.0f).asString());
+  EXPECT_EQ("-1 L/s", VolumeFlowRateInLitersPerSecond(-1.0f).asString());
+  EXPECT_EQ("-1.5 mL/s",
+            VolumeFlowRateInMillilitersPerSecond(-1.5f).asString());
+  EXPECT_EQ("-1.23456e+20 m³/s",
+            VolumeFlowRateInCubicMetersPerSecond(-1.23456e20f).asString());
+}
+
 }  // namespace roo_quantity

@@ -78,4 +78,14 @@ TEST(Area, AsString) {
   EXPECT_EQ("1.5 km²", AreaInSquareKilometers(1.5f).asString());
 }
 
+// Verifies that each cutoff selects its own unit for either sign.
+TEST(Area, AsStringAtUnitCutoffs) {
+  EXPECT_EQ("1 km²", AreaInSquareKilometers(1.0f).asString());
+  EXPECT_EQ("-1 ha", AreaInHectares(-1.0f).asString());
+  EXPECT_EQ("1 m²", AreaInSquareMeters(1.0f).asString());
+  EXPECT_EQ("-1 m²", AreaInSquareMeters(-1.0f).asString());
+  EXPECT_EQ("1 dm²", AreaInSquareDecimeters(1.0f).asString());
+  EXPECT_EQ("-1 mm²", AreaInSquareMillimeters(-1.0f).asString());
+}
+
 }  // namespace roo_quantity
