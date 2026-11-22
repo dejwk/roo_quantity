@@ -1,13 +1,11 @@
-# Unreleased
+# roo_quantity 1.1.12
 
-- Inclusive comparisons involving an unknown quantity now return false.
-- Breaking API correction. Multiplying `VolumicNumber` by `Length` in either
-  order now returns `AreicNumber` in units per square meter. Update explicit
-  `LineicNumber` assignments and use the corresponding areic unit accessors.
-- Correct conversion from square meters to hectares.
-- Area, volume, and volume flow rate select display units by magnitude and
-  switch units at the exact cutoff.
-- Enable the ESP-IDF ESP32 Bazel profile and run it alongside Arduino in CI.
+- Bugfix: Multiplying `VolumicNumber` by `Length` in either order now returns `AreicNumber` in units per square meter. Change explicit `LineicNumber` assignments to `AreicNumber` and use the corresponding areic unit accessors.
+- Inclusive comparisons (`<=` and `>=`) now return false if either quantity is unknown.
+- Fixed `Area::inHectares()` so 10,000 m² converts to 1 ha.
+- Area, volume, and volume flow rate now choose display units by absolute magnitude, switch units at the exact cutoff, and preserve the sign.
+- Enabled the ESP-IDF ESP32 Bazel profile alongside Arduino in CI. Added profile definitions for ESP32-C3, ESP32-S3, and RP2040. The expanded nine-profile local test helper requires importing the new definitions into Bazel.
+- Updated `roo_testing` to 2.7.0 in Bazel and CI. Updated `roo_flags` to 1.2.6, `roo_logging` to 1.6.1, and `roo_time` to 2.2.1 in Bazel and raised the PlatformIO minimum versions to match.
 
 ---
 

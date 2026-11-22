@@ -16,7 +16,7 @@
         "type": "git",
         "url": "https://github.com/dejwk/roo_quantity"
     },
-    "version": "1.1.11",
+    "version": "1.1.12",
     "homepage": "https://github.com/dejwk/roo_quantity",
     "frameworks": [
         "Arduino"
@@ -30,7 +30,7 @@
     ],
     "dependencies": {
         "dejwk/roo_flags": ">=1.2.6",
-        "dejwk/roo_logging": ">=1.5.11",
-        "dejwk/roo_time": ">=2.0.1"
+        "dejwk/roo_logging": ">=1.6.1",
+        "dejwk/roo_time": ">=2.2.1"
     }
 }
