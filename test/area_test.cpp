@@ -12,8 +12,14 @@ TEST(Area, ConversionSi) {
   EXPECT_FLOAT_EQ(1500000.0f, a.inSquareMillimeters());
   EXPECT_FLOAT_EQ(1500000000000.0f, a.inSquareMicrometers());
   EXPECT_FLOAT_EQ(0.0000015f, a.inSquareKilometers());
-  EXPECT_FLOAT_EQ(0.000015f, a.inHectares());
+  EXPECT_FLOAT_EQ(0.00015f, a.inHectares());
   EXPECT_FLOAT_EQ(0.015f, a.inAres());
+}
+
+// Verifies the conversion and its inverse at one hectare.
+TEST(Area, HectareConversion) {
+  EXPECT_FLOAT_EQ(10000.0f, AreaInHectares(1.0f).inSquareMeters());
+  EXPECT_FLOAT_EQ(1.0f, AreaInHectares(1.0f).inHectares());
 }
 
 TEST(Area, ConversionNonSi) {

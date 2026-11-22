@@ -26,7 +26,7 @@ class Area {
   float inSquareKilometers() const { return area_ * 0.000001f; }
 
   /// Returns the area in hectares.
-  float inHectares() const { return area_ * 0.00001f; }
+  float inHectares() const { return area_ * 0.0001f; }
 
   /// Returns the area in ares.
   float inAres() const { return area_ * 0.01f; }
