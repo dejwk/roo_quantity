@@ -68,6 +68,17 @@ cc_test(
 )
 
 cc_test(
+    name = "comparison_test",
+    size = "small",
+    srcs = ["test/comparison_test.cpp"],
+    linkstatic = 1,
+    deps = [
+        ":roo_quantity",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
     name = "current_test",
     size = "small",
     srcs = glob(["test/current_test.cpp"]),

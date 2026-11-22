@@ -93,11 +93,11 @@ class VolumicNumber {
   }
 
   bool operator<=(const VolumicNumber &other) const {
-    return !(other.volumic_number_ < volumic_number_);
+    return volumic_number_ <= other.volumic_number_;
   }
 
   bool operator>=(const VolumicNumber &other) const {
-    return !(volumic_number_ < other.volumic_number_);
+    return volumic_number_ >= other.volumic_number_;
   }
 
   bool operator!=(const VolumicNumber &other) const {

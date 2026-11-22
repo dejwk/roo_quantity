@@ -51,11 +51,11 @@ class Voltage {
   }
 
   bool operator<=(const Voltage& other) const {
-    return !(other.voltage_ < voltage_);
+    return voltage_ <= other.voltage_;
   }
 
   bool operator>=(const Voltage& other) const {
-    return !(voltage_ < other.voltage_);
+    return voltage_ >= other.voltage_;
   }
 
   bool operator!=(const Voltage& other) const {

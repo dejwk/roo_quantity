@@ -61,9 +61,9 @@ class Area {
 
   bool operator>(const Area &other) const { return other.area_ < area_; }
 
-  bool operator<=(const Area &other) const { return !(other.area_ < area_); }
+  bool operator<=(const Area& other) const { return area_ <= other.area_; }
 
-  bool operator>=(const Area &other) const { return !(area_ < other.area_); }
+  bool operator>=(const Area& other) const { return area_ >= other.area_; }
 
   bool operator!=(const Area &other) const { return !(area_ == other.area_); }
 

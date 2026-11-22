@@ -45,9 +45,9 @@ class Force {
 
   bool operator>(const Force& other) const { return other.force_ < force_; }
 
-  bool operator<=(const Force& other) const { return !(other.force_ < force_); }
+  bool operator<=(const Force& other) const { return force_ <= other.force_; }
 
-  bool operator>=(const Force& other) const { return !(force_ < other.force_); }
+  bool operator>=(const Force& other) const { return force_ >= other.force_; }
 
   bool operator!=(const Force& other) const {
     return !(force_ == other.force_);

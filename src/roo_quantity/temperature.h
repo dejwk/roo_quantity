@@ -53,11 +53,11 @@ class Temperature {
   }
 
   bool operator<=(const Temperature &other) const {
-    return !(other.tempC_ < tempC_);
+    return tempC_ <= other.tempC_;
   }
 
   bool operator>=(const Temperature &other) const {
-    return !(tempC_ < other.tempC_);
+    return tempC_ >= other.tempC_;
   }
 
   bool operator!=(const Temperature &other) const {
@@ -122,11 +122,11 @@ class TemperatureDelta {
   }
 
   bool operator<=(const TemperatureDelta &other) const {
-    return !(other.tempC_ < tempC_);
+    return tempC_ <= other.tempC_;
   }
 
   bool operator>=(const TemperatureDelta &other) const {
-    return !(tempC_ < other.tempC_);
+    return tempC_ >= other.tempC_;
   }
 
   bool operator!=(const TemperatureDelta &other) const {

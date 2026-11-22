@@ -58,11 +58,11 @@ class Capacitance {
   }
 
   bool operator<=(const Capacitance& other) const {
-    return !(other.capacitance_ < capacitance_);
+    return capacitance_ <= other.capacitance_;
   }
 
   bool operator>=(const Capacitance& other) const {
-    return !(capacitance_ < other.capacitance_);
+    return capacitance_ >= other.capacitance_;
   }
 
   bool operator!=(const Capacitance& other) const {

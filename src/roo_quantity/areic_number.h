@@ -81,11 +81,11 @@ class AreicNumber {
   }
 
   bool operator<=(const AreicNumber &other) const {
-    return !(other.areic_number_ < areic_number_);
+    return areic_number_ <= other.areic_number_;
   }
 
   bool operator>=(const AreicNumber &other) const {
-    return !(areic_number_ < other.areic_number_);
+    return areic_number_ >= other.areic_number_;
   }
 
   bool operator!=(const AreicNumber &other) const {

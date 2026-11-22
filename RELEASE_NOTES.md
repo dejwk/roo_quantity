@@ -1,3 +1,9 @@
+# Unreleased
+
+- Inclusive comparisons involving an unknown quantity now return false.
+
+---
+
 # roo_quantity 1.1.11
 
 - Update `roo_logging` to 1.5.11 and `roo_time` to 2.0.1, including PlatformIO minimum versions.

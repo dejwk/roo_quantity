@@ -47,9 +47,9 @@ class Time {
 
   bool operator>(const Time& other) const { return other.time_ < time_; }
 
-  bool operator<=(const Time& other) const { return !(other.time_ < time_); }
+  bool operator<=(const Time& other) const { return time_ <= other.time_; }
 
-  bool operator>=(const Time& other) const { return !(time_ < other.time_); }
+  bool operator>=(const Time& other) const { return time_ >= other.time_; }
 
   bool operator!=(const Time& other) const { return !(time_ == other.time_); }
 

@@ -67,11 +67,11 @@ class Pressure {
   }
 
   bool operator<=(const Pressure& other) const {
-    return !(other.pressure_ < pressure_);
+    return pressure_ <= other.pressure_;
   }
 
   bool operator>=(const Pressure& other) const {
-    return !(pressure_ < other.pressure_);
+    return pressure_ >= other.pressure_;
   }
 
   bool operator!=(const Pressure& other) const {

@@ -66,11 +66,11 @@ class Length {
   bool operator>(const Length& other) const { return other.length_ < length_; }
 
   bool operator<=(const Length& other) const {
-    return !(other.length_ < length_);
+    return length_ <= other.length_;
   }
 
   bool operator>=(const Length& other) const {
-    return !(length_ < other.length_);
+    return length_ >= other.length_;
   }
 
   bool operator!=(const Length& other) const {

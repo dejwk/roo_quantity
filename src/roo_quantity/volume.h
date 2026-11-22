@@ -65,11 +65,11 @@ class Volume {
   bool operator>(const Volume &other) const { return other.volume_ < volume_; }
 
   bool operator<=(const Volume &other) const {
-    return !(other.volume_ < volume_);
+    return volume_ <= other.volume_;
   }
 
   bool operator>=(const Volume &other) const {
-    return !(volume_ < other.volume_);
+    return volume_ >= other.volume_;
   }
 
   bool operator!=(const Volume &other) const {

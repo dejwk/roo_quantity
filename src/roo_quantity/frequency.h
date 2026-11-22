@@ -69,11 +69,11 @@ class Frequency {
   }
 
   bool operator<=(const Frequency &other) const {
-    return !(other.frequency_ < frequency_);
+    return frequency_ <= other.frequency_;
   }
 
   bool operator>=(const Frequency &other) const {
-    return !(frequency_ < other.frequency_);
+    return frequency_ >= other.frequency_;
   }
 
   bool operator!=(const Frequency &other) const {

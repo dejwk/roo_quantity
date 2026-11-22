@@ -50,9 +50,9 @@ class Power {
 
   bool operator>(const Power& other) const { return other.power_ < power_; }
 
-  bool operator<=(const Power& other) const { return !(other.power_ < power_); }
+  bool operator<=(const Power& other) const { return power_ <= other.power_; }
 
-  bool operator>=(const Power& other) const { return !(power_ < other.power_); }
+  bool operator>=(const Power& other) const { return power_ >= other.power_; }
 
   bool operator!=(const Power& other) const {
     return !(power_ == other.power_);

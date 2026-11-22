@@ -42,9 +42,9 @@ class Work {
 
   bool operator>(const Work& other) const { return other.work_ < work_; }
 
-  bool operator<=(const Work& other) const { return !(other.work_ < work_); }
+  bool operator<=(const Work& other) const { return work_ <= other.work_; }
 
-  bool operator>=(const Work& other) const { return !(work_ < other.work_); }
+  bool operator>=(const Work& other) const { return work_ >= other.work_; }
 
   bool operator!=(const Work& other) const { return !(work_ == other.work_); }
 

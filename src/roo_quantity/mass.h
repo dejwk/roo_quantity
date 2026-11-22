@@ -53,9 +53,9 @@ class Mass {
 
   bool operator>(const Mass& other) const { return other.mass_ < mass_; }
 
-  bool operator<=(const Mass& other) const { return !(other.mass_ < mass_); }
+  bool operator<=(const Mass& other) const { return mass_ <= other.mass_; }
 
-  bool operator>=(const Mass& other) const { return !(mass_ < other.mass_); }
+  bool operator>=(const Mass& other) const { return mass_ >= other.mass_; }
 
   bool operator!=(const Mass& other) const { return !(mass_ == other.mass_); }
 

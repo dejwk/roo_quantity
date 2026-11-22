@@ -60,11 +60,11 @@ class Resistance {
   }
 
   bool operator<=(const Resistance& other) const {
-    return !(other.resistance_ < resistance_);
+    return resistance_ <= other.resistance_;
   }
 
   bool operator>=(const Resistance& other) const {
-    return !(resistance_ < other.resistance_);
+    return resistance_ >= other.resistance_;
   }
 
   bool operator!=(const Resistance& other) const {

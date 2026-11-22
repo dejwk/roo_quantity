@@ -79,11 +79,11 @@ class LineicNumber {
   }
 
   bool operator<=(const LineicNumber &other) const {
-    return !(other.lineic_number_ < lineic_number_);
+    return lineic_number_ <= other.lineic_number_;
   }
 
   bool operator>=(const LineicNumber &other) const {
-    return !(lineic_number_ < other.lineic_number_);
+    return lineic_number_ >= other.lineic_number_;
   }
 
   bool operator!=(const LineicNumber &other) const {

@@ -45,11 +45,11 @@ class Charge {
   bool operator>(const Charge& other) const { return other.charge_ < charge_; }
 
   bool operator<=(const Charge& other) const {
-    return !(other.charge_ < charge_);
+    return charge_ <= other.charge_;
   }
 
   bool operator>=(const Charge& other) const {
-    return !(charge_ < other.charge_);
+    return charge_ >= other.charge_;
   }
 
   bool operator!=(const Charge& other) const {

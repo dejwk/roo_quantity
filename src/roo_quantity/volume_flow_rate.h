@@ -52,11 +52,11 @@ class VolumeFlowRate {
   }
 
   bool operator<=(const VolumeFlowRate& other) const {
-    return !(other.volume_flow_rate_ < volume_flow_rate_);
+    return volume_flow_rate_ <= other.volume_flow_rate_;
   }
 
   bool operator>=(const VolumeFlowRate& other) const {
-    return !(volume_flow_rate_ < other.volume_flow_rate_);
+    return volume_flow_rate_ >= other.volume_flow_rate_;
   }
 
   bool operator!=(const VolumeFlowRate& other) const {

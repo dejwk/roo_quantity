@@ -54,11 +54,11 @@ class Current {
   }
 
   bool operator<=(const Current& other) const {
-    return !(other.current_ < current_);
+    return current_ <= other.current_;
   }
 
   bool operator>=(const Current& other) const {
-    return !(current_ < other.current_);
+    return current_ >= other.current_;
   }
 
   bool operator!=(const Current& other) const {

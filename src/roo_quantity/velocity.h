@@ -66,11 +66,11 @@ class Velocity {
   }
 
   bool operator<=(const Velocity& other) const {
-    return !(other.velocity_ < velocity_);
+    return velocity_ <= other.velocity_;
   }
 
   bool operator>=(const Velocity& other) const {
-    return !(velocity_ < other.velocity_);
+    return velocity_ >= other.velocity_;
   }
 
   bool operator!=(const Velocity& other) const {
