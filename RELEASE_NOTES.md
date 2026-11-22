@@ -1,6 +1,9 @@
 # Unreleased
 
 - Inclusive comparisons involving an unknown quantity now return false.
+- Breaking API correction. Multiplying `VolumicNumber` by `Length` in either
+  order now returns `AreicNumber` in units per square meter. Update explicit
+  `LineicNumber` assignments and use the corresponding areic unit accessors.
 
 ---
 

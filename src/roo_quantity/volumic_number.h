@@ -250,13 +250,14 @@ inline float operator*(VolumicNumber a, Volume b) {
   return a.inUnitsPerCubicMeter() * b.inCubicMeters();
 }
 
-inline LineicNumber operator*(Length a, VolumicNumber b) {
-  return LineicNumberInUnitsPerMeter(a.inMeters() * b.inUnitsPerCubicMeter());
+/// Returns the count per area for a layer of thickness @p a and density @p b.
+inline AreicNumber operator*(Length a, VolumicNumber b) {
+  return AreicNumberInUnitsPerSquareMeter(a.inMeters() *
+                                          b.inUnitsPerCubicMeter());
 }
 
-inline LineicNumber operator*(VolumicNumber a, Length b) {
-  return LineicNumberInUnitsPerMeter(a.inUnitsPerCubicMeter() * b.inMeters());
-}
+/// Returns the count per area for density @p a and layer thickness @p b.
+inline AreicNumber operator*(VolumicNumber a, Length b) { return b * a; }
 
 inline VolumicNumber operator/(VolumicNumber a, float b) {
   return VolumicNumberInUnitsPerCubicMeter(a.inUnitsPerCubicMeter() / b);

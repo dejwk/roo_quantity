@@ -1,5 +1,7 @@
 #include "roo_quantity/volumic_number.h"
 
+#include <type_traits>
+
 #include "gtest/gtest.h"
 
 namespace roo_quantity {
@@ -86,6 +88,18 @@ TEST(VolumicNumber, Operators) {
   EXPECT_FLOAT_EQ(1.0f, vnd1.inUnitsPerCubicMeter());
 
   EXPECT_FLOAT_EQ(3.0f, (3.0f * vnd1).inUnitsPerCubicMeter());
+}
+
+// Verifies that integrating a volumic number over a length gives an areic
+// number in either operand order.
+TEST(VolumicNumber, MultiplyByLength) {
+  const VolumicNumber density = VolumicNumberInUnitsPerCubicMeter(5.0f);
+  const Length thickness = LengthInCentimeters(200.0f);
+
+  static_assert(std::is_same_v<decltype(density * thickness), AreicNumber>);
+  static_assert(std::is_same_v<decltype(thickness * density), AreicNumber>);
+  EXPECT_FLOAT_EQ(10.0f, (density * thickness).inUnitsPerSquareMeter());
+  EXPECT_FLOAT_EQ(10.0f, (thickness * density).inUnitsPerSquareMeter());
 }
 
 TEST(VolumicNumber, Reciprocal) {
