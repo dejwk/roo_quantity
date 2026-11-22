@@ -7,6 +7,7 @@
 - Correct conversion from square meters to hectares.
 - Area, volume, and volume flow rate select display units by magnitude and
   switch units at the exact cutoff.
+- Enable the ESP-IDF ESP32 Bazel profile and run it alongside Arduino in CI.
 
 ---
 
